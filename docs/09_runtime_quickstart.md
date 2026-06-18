@@ -53,6 +53,27 @@ Export Proof Packet
 
 Use **Preset Black Path** or **Preset Refusal** to quickly demonstrate negative consequence controls.
 
+## Evidence Attachment Layer
+
+The dashboard includes structured evidence references.
+
+Each movement may include `evidence_items` with:
+
+```text
+evidence_id
+evidence_type
+source_system
+custody_owner
+hash_reference
+required
+status
+notes
+```
+
+The receipt includes an `evidence_summary` with counts for required, accepted, missing, insufficient, custody gaps, and hash references. The evidence summary is included in the signed receipt envelope and checked during replay.
+
+Use **Preset Accepted Evidence** for a clean admission surface, or **Preset Missing Evidence** to show evidence/custody failure before consequence binds.
+
 ## Run Docker Sandbox
 
 ```bash
@@ -96,7 +117,19 @@ curl -X POST http://localhost:8080/movements/assess \
     "revalidation_required": false,
     "receipt_available": true,
     "replay_available": true,
-    "notes": "Client-entered movement."
+    "notes": "Client-entered movement.",
+    "evidence_items": [
+      {
+        "evidence_id": "EV-CLIENT-001",
+        "evidence_type": "policy_record",
+        "source_system": "client.governance.registry",
+        "custody_owner": "operations.owner",
+        "hash_reference": "sha256:client-demo-reference",
+        "required": true,
+        "status": "accepted",
+        "notes": "Required evidence reference for this movement."
+      }
+    ]
   }'
 ```
 
@@ -119,5 +152,5 @@ python -m consequence_twin.cli store examples/sample_assessments.json --db data/
 The runtime path is:
 
 ```text
-movement intake -> deterministic verdict -> signed receipt -> storage -> replay check -> current exposure graph -> dashboard
+movement intake -> structured evidence references -> deterministic verdict -> signed receipt -> storage -> replay check -> current exposure graph -> dashboard
 ```
