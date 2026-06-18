@@ -86,6 +86,6 @@ This repository is a commercial and technical scaffold. It is not the full Elyri
 
 ## Ownership Notice
 
-Copyright (c) Samantha Revita-Wagner / Elyria Systems. All rights reserved.
+Copyright (c) Samantha Revita / Elyria Systems. All rights reserved.
 
 No license is granted unless separately agreed in writing. This repository may contain proprietary product positioning, governance methodology, diagnostic structures, schema designs, and implementation planning artifacts.
