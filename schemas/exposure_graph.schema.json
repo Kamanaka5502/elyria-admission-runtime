@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elyria.systems/schemas/exposure_graph.schema.json",
+  "title": "Consequence Exposure Graph",
+  "type": "object",
+  "required": [
+    "graph_id",
+    "nodes",
+    "edges",
+    "assessments"
+  ],
+  "properties": {
+    "graph_id": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "consequence_node.schema.json"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "consequence_edge.schema.json"
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "$ref": "assessment.schema.json"
+      }
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}
