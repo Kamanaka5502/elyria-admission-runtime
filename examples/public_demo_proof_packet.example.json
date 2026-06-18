@@ -1,0 +1,176 @@
+{
+  "example_only": true,
+  "safety_note": "Sanitized public example. Do not treat receipt IDs, signatures, hashes, timestamps, or evidence references as production proof.",
+  "service": {
+    "status": "ok",
+    "service": "elyria-consequence-twin",
+    "version": "0.7.0",
+    "mode": "demo",
+    "storage_backend": "sqlite"
+  },
+  "graph": {
+    "graph_id": "CURRENT-GRAPH",
+    "summary": {
+      "total_movements": 2,
+      "admit": 1,
+      "hold": 0,
+      "refuse": 0,
+      "black_paths": 1
+    },
+    "edges": [
+      {
+        "id": "PUBLIC-DEMO-ADMIT-001",
+        "from": "client.workflow",
+        "to": "protected.action",
+        "verdict": "ADMIT",
+        "color": "green",
+        "reasons": [
+          "all required admission dimensions hold"
+        ]
+      },
+      {
+        "id": "PUBLIC-DEMO-BLACK-001",
+        "from": "client.evidence.check",
+        "to": "client.payment.release",
+        "verdict": "NO_PROVABLE_ADMISSION",
+        "color": "black",
+        "reasons": [
+          "consequence path lacks durable receipt or replay proof",
+          "authority appears to admit movement without required evidence",
+          "required evidence missing before bind",
+          "custody not preserved",
+          "receipt unavailable",
+          "replay unavailable"
+        ]
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "receipt_id": "RCT-PUBLIC-EXAMPLE-0001",
+      "movement_id": "PUBLIC-DEMO-ADMIT-001",
+      "verdict": "ADMIT",
+      "color": "green",
+      "reasons": [
+        "all required admission dimensions hold"
+      ],
+      "timestamp_utc": "2026-01-01T00:00:00+00:00",
+      "input_hash": "sha256-public-example-input-hash",
+      "engine_version": "0.3.0",
+      "signature_algorithm": "HMAC-SHA256",
+      "signature": "public-example-signature-not-production-proof",
+      "evidence_summary": {
+        "total": 1,
+        "required": 1,
+        "accepted": 1,
+        "missing": 0,
+        "insufficient": 0,
+        "custody_gaps": 0,
+        "hash_references": 1,
+        "source_systems": [
+          "public.demo.registry"
+        ],
+        "custody_owners": [
+          "demo.owner"
+        ],
+        "status": "supporting",
+        "reasons": []
+      },
+      "original_input": {
+        "movement_id": "PUBLIC-DEMO-ADMIT-001",
+        "source_node": "client.workflow",
+        "target_node": "protected.action",
+        "authority_present": true,
+        "authority_scope_valid": true,
+        "standing_active": true,
+        "evidence_present": true,
+        "evidence_sufficient": true,
+        "custody_preserved": true,
+        "refusal_condition_active": false,
+        "revalidation_required": false,
+        "receipt_available": true,
+        "replay_available": true,
+        "notes": "Public demo admitted movement.",
+        "evidence_items": [
+          {
+            "evidence_id": "EV-PUBLIC-001",
+            "evidence_type": "policy_record",
+            "source_system": "public.demo.registry",
+            "custody_owner": "demo.owner",
+            "hash_reference": "sha256:public-demo-reference",
+            "required": true,
+            "status": "accepted",
+            "notes": "Sanitized demo evidence reference."
+          }
+        ]
+      }
+    },
+    {
+      "receipt_id": "RCT-PUBLIC-EXAMPLE-0002",
+      "movement_id": "PUBLIC-DEMO-BLACK-001",
+      "verdict": "NO_PROVABLE_ADMISSION",
+      "color": "black",
+      "reasons": [
+        "consequence path lacks durable receipt or replay proof",
+        "authority appears to admit movement without required evidence",
+        "required evidence missing before bind",
+        "custody not preserved",
+        "receipt unavailable",
+        "replay unavailable"
+      ],
+      "timestamp_utc": "2026-01-01T00:00:00+00:00",
+      "input_hash": "sha256-public-example-black-path-hash",
+      "engine_version": "0.3.0",
+      "signature_algorithm": "HMAC-SHA256",
+      "signature": "public-example-signature-not-production-proof",
+      "evidence_summary": {
+        "total": 1,
+        "required": 1,
+        "accepted": 0,
+        "missing": 1,
+        "insufficient": 0,
+        "custody_gaps": 1,
+        "hash_references": 0,
+        "source_systems": [
+          "public.demo.approvals"
+        ],
+        "custody_owners": [],
+        "status": "attention_required",
+        "reasons": [
+          "required evidence missing: EV-PUBLIC-MISSING-001",
+          "required evidence lacks custody owner: EV-PUBLIC-MISSING-001",
+          "required evidence lacks hash/reference: EV-PUBLIC-MISSING-001"
+        ]
+      },
+      "original_input": {
+        "movement_id": "PUBLIC-DEMO-BLACK-001",
+        "source_node": "client.evidence.check",
+        "target_node": "client.payment.release",
+        "authority_present": true,
+        "authority_scope_valid": true,
+        "standing_active": true,
+        "evidence_present": false,
+        "evidence_sufficient": false,
+        "custody_preserved": false,
+        "refusal_condition_active": false,
+        "revalidation_required": false,
+        "receipt_available": false,
+        "replay_available": false,
+        "notes": "Public demo black path.",
+        "evidence_items": [
+          {
+            "evidence_id": "EV-PUBLIC-MISSING-001",
+            "evidence_type": "approval_record",
+            "source_system": "public.demo.approvals",
+            "custody_owner": "",
+            "hash_reference": "",
+            "required": true,
+            "status": "missing",
+            "notes": "Sanitized missing-evidence example."
+          }
+        ]
+      }
+    }
+  ],
+  "proof_claim": "Elyria Consequence Twin classifies consequence-bearing movement before execution binds, attaches evidence references, emits signed receipts, verifies replay basis, and exposes black-path consequence risk before action becomes operationally real."
+}
