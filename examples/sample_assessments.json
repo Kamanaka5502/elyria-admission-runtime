@@ -1,0 +1,44 @@
+[
+  {
+    "movement_id": "MOVE-001",
+    "authority_present": true,
+    "authority_scope_valid": true,
+    "standing_active": true,
+    "evidence_present": true,
+    "evidence_sufficient": true,
+    "custody_preserved": true,
+    "refusal_condition_active": false,
+    "revalidation_required": false,
+    "receipt_available": true,
+    "replay_available": true,
+    "notes": "Clean admitted movement."
+  },
+  {
+    "movement_id": "MOVE-002",
+    "authority_present": true,
+    "authority_scope_valid": true,
+    "standing_active": true,
+    "evidence_present": false,
+    "evidence_sufficient": false,
+    "custody_preserved": false,
+    "refusal_condition_active": false,
+    "revalidation_required": false,
+    "receipt_available": false,
+    "replay_available": false,
+    "notes": "Black path: action can progress without evidence, receipt, or replay."
+  },
+  {
+    "movement_id": "MOVE-003",
+    "authority_present": false,
+    "authority_scope_valid": false,
+    "standing_active": false,
+    "evidence_present": true,
+    "evidence_sufficient": true,
+    "custody_preserved": true,
+    "refusal_condition_active": true,
+    "revalidation_required": false,
+    "receipt_available": true,
+    "replay_available": true,
+    "notes": "Hard refused movement."
+  }
+]
