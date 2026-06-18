@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elyria.systems/schemas/consequence_edge.schema.json",
+  "title": "Consequence Edge",
+  "type": "object",
+  "required": [
+    "movement_id",
+    "source_node",
+    "target_node",
+    "consequence_type",
+    "authority_required",
+    "evidence_required",
+    "refusal_conditions",
+    "revalidation_triggers"
+  ],
+  "properties": {
+    "movement_id": {
+      "type": "string"
+    },
+    "source_node": {
+      "type": "string"
+    },
+    "target_node": {
+      "type": "string"
+    },
+    "consequence_type": {
+      "type": "string"
+    },
+    "authority_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "custody_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "refusal_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "revalidation_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "receipt_required": {
+      "type": "boolean"
+    },
+    "replay_required": {
+      "type": "boolean"
+    }
+  }
+}
