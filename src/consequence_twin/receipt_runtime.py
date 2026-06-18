@@ -9,9 +9,10 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from .engine import assess_movement
+from .evidence import summarize_evidence
 from .settings import get_settings
 
-ENGINE_VERSION = "0.2.0"
+ENGINE_VERSION = "0.3.0"
 SIGNATURE_ALGORITHM = "HMAC-SHA256"
 
 
@@ -43,6 +44,7 @@ class ReceiptRecord:
     input_hash: str
     engine_version: str
     original_input: Dict[str, Any]
+    evidence_summary: Dict[str, Any]
     signature_algorithm: str
     signature: str
 
@@ -61,11 +63,13 @@ def receipt_signing_material(record: Dict[str, Any]) -> Dict[str, Any]:
         "input_hash": record["input_hash"],
         "engine_version": record["engine_version"],
         "original_input": record["original_input"],
+        "evidence_summary": record.get("evidence_summary", summarize_evidence(record["original_input"])),
     }
 
 
 def create_receipt(payload: Dict[str, Any]) -> ReceiptRecord:
     result = assess_movement(payload)
+    evidence_summary = summarize_evidence(payload)
     unsigned = {
         "receipt_id": f"RCT-{uuid.uuid4().hex[:16].upper()}",
         "movement_id": result.movement_id,
@@ -76,6 +80,7 @@ def create_receipt(payload: Dict[str, Any]) -> ReceiptRecord:
         "input_hash": sha256_json(payload),
         "engine_version": ENGINE_VERSION,
         "original_input": dict(payload),
+        "evidence_summary": evidence_summary,
     }
     return ReceiptRecord(
         **unsigned,
@@ -95,11 +100,13 @@ def verify_receipt(record: Dict[str, Any]) -> Dict[str, Any]:
     )
     expected_signature = sign_payload(receipt_signing_material(record))
     signature_matches = hmac.compare_digest(record.get("signature", ""), expected_signature)
+    evidence_summary_matches = record.get("evidence_summary") == summarize_evidence(payload)
     return {
         "receipt_id": record["receipt_id"],
         "input_hash_matches": sha256_json(payload) == record["input_hash"],
         "verdict_matches": verdict_matches,
         "signature_matches": signature_matches,
         "signature_algorithm": record.get("signature_algorithm"),
+        "evidence_summary_matches": evidence_summary_matches,
         "actual": result,
     }
