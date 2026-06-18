@@ -23,13 +23,24 @@ def test_client_mode_requires_auth(monkeypatch, tmp_path):
     assert response.status_code == 401
 
 
+def test_client_mode_protects_sandbox_reset(monkeypatch, tmp_path):
+    monkeypatch.setenv("ELYRIA_MODE", "client")
+    monkeypatch.setenv("ELYRIA_API_TOKEN", "test-token")
+    monkeypatch.setenv("ELYRIA_DB_PATH", str(tmp_path / "client.db"))
+    client = TestClient(app)
+    response = client.post("/sandbox/reset")
+    assert response.status_code == 401
+
+
 def test_client_mode_accepts_bearer_token(monkeypatch, tmp_path):
     monkeypatch.setenv("ELYRIA_MODE", "client")
     monkeypatch.setenv("ELYRIA_API_TOKEN", "test-token")
     monkeypatch.setenv("ELYRIA_DB_PATH", str(tmp_path / "client.db"))
     client = TestClient(app)
-    client.post("/sandbox/reset")
-    response = client.get("/receipts", headers={"Authorization": "Bearer test-token"})
+    headers = {"Authorization": "Bearer test-token"}
+    reset = client.post("/sandbox/reset", headers=headers)
+    assert reset.status_code == 200
+    response = client.get("/receipts", headers=headers)
     assert response.status_code == 200
     assert "items" in response.json()
 
