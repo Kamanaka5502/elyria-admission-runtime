@@ -1,0 +1,181 @@
+{
+  "status": "reset",
+  "receipt_count": 3,
+  "receipts": [
+    {
+      "receipt_id": "RCT-64A7E46FC91F4EEE",
+      "movement_id": "MOVE-001",
+      "verdict": "ADMIT",
+      "color": "green",
+      "reasons": [
+        "all required admission dimensions hold"
+      ],
+      "timestamp_utc": "2026-06-18T22:44:54+00:00",
+      "input_hash": "4fc6d1f1edc8d82d259e48287b6d6bf3422b848d2deafccd2621846caa9db93a",
+      "engine_version": "0.1.0",
+      "original_input": {
+        "movement_id": "MOVE-001",
+        "source_node": "ai.recommendation",
+        "target_node": "operator.approval",
+        "authority_present": true,
+        "authority_scope_valid": true,
+        "standing_active": true,
+        "evidence_present": true,
+        "evidence_sufficient": true,
+        "custody_preserved": true,
+        "refusal_condition_active": false,
+        "revalidation_required": false,
+        "receipt_available": true,
+        "replay_available": true,
+        "notes": "Clean admitted movement."
+      }
+    },
+    {
+      "receipt_id": "RCT-1B53E374692E4CF4",
+      "movement_id": "MOVE-002",
+      "verdict": "NO_PROVABLE_ADMISSION",
+      "color": "black",
+      "reasons": [
+        "consequence path lacks durable receipt or replay proof",
+        "authority appears to admit movement without required evidence",
+        "required evidence missing before bind",
+        "custody not preserved",
+        "receipt unavailable",
+        "replay unavailable"
+      ],
+      "timestamp_utc": "2026-06-18T22:44:54+00:00",
+      "input_hash": "f8a5a825888c24c0bc9fca9fbbdd69117ab9a54a5241e9177946a8683e07e42e",
+      "engine_version": "0.1.0",
+      "original_input": {
+        "movement_id": "MOVE-002",
+        "source_node": "evidence.check",
+        "target_node": "payment.release",
+        "authority_present": true,
+        "authority_scope_valid": true,
+        "standing_active": true,
+        "evidence_present": false,
+        "evidence_sufficient": false,
+        "custody_preserved": false,
+        "refusal_condition_active": false,
+        "revalidation_required": false,
+        "receipt_available": false,
+        "replay_available": false,
+        "notes": "Black path: movement can attempt to bind without evidence, receipt, or replay."
+      }
+    },
+    {
+      "receipt_id": "RCT-978F50356ED648E0",
+      "movement_id": "MOVE-003",
+      "verdict": "REFUSE",
+      "color": "red",
+      "reasons": [
+        "active refusal condition blocks consequence movement",
+        "authority absent",
+        "standing inactive or expired"
+      ],
+      "timestamp_utc": "2026-06-18T22:44:54+00:00",
+      "input_hash": "2df4bc360fff32932ac985299ab4a6242a0f2b897e168bcce2a9644a01ddd662",
+      "engine_version": "0.1.0",
+      "original_input": {
+        "movement_id": "MOVE-003",
+        "source_node": "unscoped.override",
+        "target_node": "customer.escalation",
+        "authority_present": false,
+        "authority_scope_valid": false,
+        "standing_active": false,
+        "evidence_present": true,
+        "evidence_sufficient": true,
+        "custody_preserved": true,
+        "refusal_condition_active": true,
+        "revalidation_required": false,
+        "receipt_available": true,
+        "replay_available": true,
+        "notes": "Hard refused movement."
+      }
+    }
+  ],
+  "graph": {
+    "graph_id": "DEMO-GRAPH",
+    "nodes": [
+      {
+        "id": "ai.recommendation",
+        "label": "ai.recommendation",
+        "kind": "source"
+      },
+      {
+        "id": "operator.approval",
+        "label": "operator.approval",
+        "kind": "target",
+        "status": "green"
+      },
+      {
+        "id": "evidence.check",
+        "label": "evidence.check",
+        "kind": "source"
+      },
+      {
+        "id": "payment.release",
+        "label": "payment.release",
+        "kind": "target",
+        "status": "black"
+      },
+      {
+        "id": "unscoped.override",
+        "label": "unscoped.override",
+        "kind": "source"
+      },
+      {
+        "id": "customer.escalation",
+        "label": "customer.escalation",
+        "kind": "target",
+        "status": "red"
+      }
+    ],
+    "edges": [
+      {
+        "id": "MOVE-001",
+        "from": "ai.recommendation",
+        "to": "operator.approval",
+        "verdict": "ADMIT",
+        "color": "green",
+        "reasons": [
+          "all required admission dimensions hold"
+        ]
+      },
+      {
+        "id": "MOVE-002",
+        "from": "evidence.check",
+        "to": "payment.release",
+        "verdict": "NO_PROVABLE_ADMISSION",
+        "color": "black",
+        "reasons": [
+          "consequence path lacks durable receipt or replay proof",
+          "authority appears to admit movement without required evidence",
+          "required evidence missing before bind",
+          "custody not preserved",
+          "receipt unavailable",
+          "replay unavailable"
+        ]
+      },
+      {
+        "id": "MOVE-003",
+        "from": "unscoped.override",
+        "to": "customer.escalation",
+        "verdict": "REFUSE",
+        "color": "red",
+        "reasons": [
+          "active refusal condition blocks consequence movement",
+          "authority absent",
+          "standing inactive or expired"
+        ]
+      }
+    ],
+    "summary": {
+      "total_movements": 3,
+      "admit": 1,
+      "hold": 0,
+      "refuse": 1,
+      "black_paths": 1
+    }
+  }
+}
