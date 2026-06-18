@@ -33,10 +33,17 @@
     .metric p { margin: 0; color: #cdeeff; }
     button { background: var(--cyan); color: #021018; border: 0; border-radius: 10px; padding: 12px 16px; font-weight: 900; cursor: pointer; margin: 6px 8px 6px 0; }
     button.secondary { background: #10283a; color: var(--cyan); border: 1px solid var(--line); }
+    button.danger { background: #371217; color: #ff9aa4; border: 1px solid rgba(255,108,108,.58); }
+    input { width: min(520px, 100%); background: #02070c; color: #e8f8ff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 6px 8px 6px 0; }
     pre { overflow: auto; background: #02070c; border: 1px solid rgba(122,238,255,.22); border-radius: 12px; padding: 14px; max-height: 420px; }
     .green { color: var(--green); } .yellow { color: var(--yellow); } .red { color: var(--red); } .black { color: var(--black); }
     .warning { border-color: rgba(255,108,108,.58); background: linear-gradient(135deg, rgba(77,10,14,.66), rgba(6,19,31,.76)); display: none; }
     .warning strong { color: var(--red); }
+    .status-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .pill { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; background: rgba(2,9,15,.7); font-weight: 900; }
+    .pill.open { color: var(--green); border-color: rgba(72,255,154,.55); }
+    .pill.locked { color: var(--yellow); border-color: rgba(255,230,109,.55); }
+    .auth-help { color: #cdeeff; margin: 8px 0 0; }
     .graph-wrap { overflow-x: auto; }
     .graph { min-width: 860px; display: grid; grid-template-columns: 1fr 120px 1fr; gap: 18px; align-items: center; }
     .node { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: rgba(2, 9, 15, .88); margin: 12px 0; }
@@ -58,6 +65,20 @@
     <p class="lede">A live sandbox for classifying consequence-bearing movement, emitting receipts, replaying verdict basis, and exposing black-path execution risk before action becomes operationally real.</p>
   </header>
   <main>
+    <section class="card">
+      <div class="status-row">
+        <span class="pill" id="mode-pill">Mode: checking</span>
+        <span class="pill" id="storage-pill">Storage: checking</span>
+        <span class="pill" id="auth-pill">Auth: token not stored</span>
+      </div>
+      <h2 style="margin-top: 18px;">Client Token Panel</h2>
+      <input id="token-input" type="password" autocomplete="off" placeholder="Bearer token for client mode" />
+      <button onclick="saveToken()">Save Token Locally</button>
+      <button class="secondary" onclick="testProtectedAccess()">Test Protected Access</button>
+      <button class="danger" onclick="clearToken()">Clear Token</button>
+      <p class="auth-help">Demo mode works without a token. Client mode protects receipt, replay, proof export, sandbox reset, and movement assessment endpoints.</p>
+    </section>
+
     <section class="grid" id="metrics">
       <div class="card metric"><h3>Total Movements</h3><div class="num" id="m-total">—</div><p>All assessed paths.</p></div>
       <div class="card metric"><h3>Admit</h3><div class="num green" id="m-admit">—</div><p>May bind consequence.</p></div>
@@ -96,17 +117,61 @@
   </main>
 
   <script>
+    const TOKEN_KEY = 'elyriaClientBearerToken';
     const out = document.getElementById('out');
     const graphEl = document.getElementById('graph');
     const receiptsEl = document.getElementById('receipts');
+    const tokenInput = document.getElementById('token-input');
+    const modePill = document.getElementById('mode-pill');
+    const storagePill = document.getElementById('storage-pill');
+    const authPill = document.getElementById('auth-pill');
     let latestProof = null;
 
     const colorClass = color => ['green','yellow','red','black'].includes(color) ? color : 'black';
 
-    async function api(url, options) {
-      const res = await fetch(url, options);
-      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-      return await res.json();
+    function savedToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
+
+    function authHeaders() {
+      const token = savedToken();
+      return token ? {'Authorization': `Bearer ${token}`} : {};
+    }
+
+    function markAuthState() {
+      const token = savedToken();
+      authPill.textContent = token ? 'Auth: token stored locally' : 'Auth: token not stored';
+      authPill.className = token ? 'pill open' : 'pill locked';
+      tokenInput.value = token;
+    }
+
+    function saveToken() {
+      const token = tokenInput.value.trim();
+      if (!token) {
+        clearToken();
+        return;
+      }
+      localStorage.setItem(TOKEN_KEY, token);
+      markAuthState();
+      out.textContent = 'Client token saved locally for this browser.';
+    }
+
+    function clearToken() {
+      localStorage.removeItem(TOKEN_KEY);
+      tokenInput.value = '';
+      markAuthState();
+      out.textContent = 'Client token cleared.';
+    }
+
+    async function api(url, options = {}) {
+      const headers = {...authHeaders(), ...(options.headers || {})};
+      const res = await fetch(url, {...options, headers});
+      const text = await res.text();
+      let data;
+      try { data = text ? JSON.parse(text) : {}; } catch { data = {raw: text}; }
+      if (!res.ok) {
+        const detail = data.detail || `${res.status} ${res.statusText}`;
+        throw new Error(`${res.status} ${res.statusText}: ${detail}`);
+      }
+      return data;
     }
 
     function show(data) { out.textContent = JSON.stringify(data, null, 2); }
@@ -138,60 +203,94 @@
           <h3>${r.verdict} · ${r.movement_id}</h3>
           <p><code>${r.receipt_id}</code></p>
           <p>Color: <span class="${colorClass(r.color)}">${r.color}</span></p>
+          <p>Signature: <code>${r.signature_algorithm || 'unsigned'}</code></p>
           ${r.reasons.map(reason => `<div class="reason">• ${reason}</div>`).join('')}
           <button onclick="replayReceipt('${r.receipt_id}')">Replay Receipt</button>
         </div>
       `).join('');
     }
 
+    async function refreshHealth() {
+      const data = await api('/healthz');
+      modePill.textContent = `Mode: ${data.mode}`;
+      modePill.className = data.mode === 'demo' ? 'pill open' : 'pill locked';
+      storagePill.textContent = `Storage: ${data.storage_backend}`;
+      storagePill.className = 'pill open';
+      return data;
+    }
+
+    async function testProtectedAccess() {
+      try {
+        const data = await api('/receipts');
+        out.textContent = `Protected access OK. Receipt count: ${data.items.length}`;
+      } catch (err) {
+        out.textContent = err.message;
+      }
+    }
+
     async function resetSandbox(){
-      const data = await api('/sandbox/reset', {method:'POST'});
-      latestProof = data;
-      renderGraph(data.graph);
-      renderReceipts(data.receipts);
-      show(data);
+      try {
+        const data = await api('/sandbox/reset', {method:'POST'});
+        latestProof = data;
+        renderGraph(data.graph);
+        renderReceipts(data.receipts);
+        show(data);
+      } catch (err) { out.textContent = err.message; }
     }
 
     async function loadGraph(){
-      const data = await api('/exposures/demo');
-      renderGraph(data);
-      show(data);
+      try {
+        const data = await api('/exposures/demo');
+        renderGraph(data);
+        show(data);
+      } catch (err) { out.textContent = err.message; }
     }
 
     async function loadReceipts(){
-      const data = await api('/receipts');
-      renderReceipts(data.items);
-      show(data);
+      try {
+        const data = await api('/receipts');
+        renderReceipts(data.items);
+        show(data);
+      } catch (err) { out.textContent = err.message; }
     }
 
     async function replayReceipt(receiptId){
-      const data = await api(`/receipts/${receiptId}/replay`, {method:'POST'});
-      show(data);
-      alert(data.verdict_matches && data.input_hash_matches ? 'Replay verified.' : 'Replay mismatch detected.');
+      try {
+        const data = await api(`/receipts/${receiptId}/replay`, {method:'POST'});
+        show(data);
+        alert(data.verdict_matches && data.input_hash_matches && data.signature_matches ? 'Replay verified.' : 'Replay mismatch detected.');
+      } catch (err) { out.textContent = err.message; }
     }
 
     async function loadRawProof(){
-      const data = await api('/demo/proof');
-      latestProof = data;
-      renderGraph(data.graph);
-      renderReceipts(data.receipts);
-      show(data);
+      try {
+        const data = await api('/demo/proof');
+        latestProof = data;
+        renderGraph(data.graph);
+        renderReceipts(data.receipts);
+        show(data);
+      } catch (err) { out.textContent = err.message; }
     }
 
     async function exportProof(){
-      const data = latestProof || await api('/demo/proof');
-      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'elyria-consequence-twin-demo-proof.json';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      try {
+        const data = latestProof || await api('/demo/proof');
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'elyria-consequence-twin-demo-proof.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      } catch (err) { out.textContent = err.message; }
     }
 
-    loadGraph().catch(err => out.textContent = err.message);
+    markAuthState();
+    refreshHealth()
+      .then(() => loadGraph())
+      .catch(err => out.textContent = err.message);
   </script>
 </body>
 </html>
