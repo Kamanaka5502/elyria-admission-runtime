@@ -15,7 +15,7 @@ from consequence_twin.storage import get_receipt, list_receipts, replay_from_sto
 
 APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
-DB_PATH = Path(os.getenv("ELYRIA_DB_PATH", "/data/elyria.db"))
+DB_PATH = Path(os.getenv("ELYRIA_DB_PATH", "data/elyria.db"))
 
 app = FastAPI(
     title="Elyria Consequence Twin API",
