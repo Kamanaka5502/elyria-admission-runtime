@@ -42,6 +42,14 @@ curl -X POST http://localhost:8080/sandbox/reset
 curl http://localhost:8080/exposures/demo
 ```
 
+## Export Demo Proof Packet
+
+```bash
+curl http://localhost:8080/demo/proof > local_artifacts/demo_proof/elyria-consequence-twin-demo-proof.json
+```
+
+The dashboard also includes an **Export Proof Packet** button that downloads the current demo proof packet as JSON.
+
 ## CLI Commands
 
 ```bash
