@@ -12,6 +12,7 @@ class EvidenceSummary:
     missing: int
     insufficient: int
     custody_gaps: int
+    hash_gaps: int
     hash_references: int
     source_systems: List[str]
     custody_owners: List[str]
@@ -37,6 +38,7 @@ def summarize_evidence(payload: Dict[str, Any]) -> Dict[str, Any]:
     missing = 0
     insufficient = 0
     custody_gaps = 0
+    hash_gaps = 0
     hash_references = 0
     source_systems: set[str] = set()
     custody_owners: set[str] = set()
@@ -82,12 +84,13 @@ def summarize_evidence(payload: Dict[str, Any]) -> Dict[str, Any]:
             custody_gaps += 1
             reasons.append(f"required evidence lacks custody owner: {item_id}")
         if required_flag and not evidence_hash:
+            hash_gaps += 1
             reasons.append(f"required evidence lacks hash/reference: {item_id}")
 
     if total == 0:
         status = "not_attached"
         reasons.append("no structured evidence attachments provided")
-    elif missing or insufficient or custody_gaps:
+    elif missing or insufficient or custody_gaps or hash_gaps:
         status = "attention_required"
     else:
         status = "supporting"
@@ -99,6 +102,7 @@ def summarize_evidence(payload: Dict[str, Any]) -> Dict[str, Any]:
         missing=missing,
         insufficient=insufficient,
         custody_gaps=custody_gaps,
+        hash_gaps=hash_gaps,
         hash_references=hash_references,
         source_systems=sorted(source_systems),
         custody_owners=sorted(custody_owners),
