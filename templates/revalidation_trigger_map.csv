@@ -1,0 +1,2 @@
+trigger_id,movement_id,trigger_event,requires_revalidation,effect_if_not_revalidated,receipt_update_required
+RT-001,MOVE-001,model version changes before approval,yes,prior admission no longer valid,yes
