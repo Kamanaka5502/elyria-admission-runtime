@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elyria.systems/schemas/consequence_node.schema.json",
+  "title": "Consequence Node",
+  "type": "object",
+  "required": [
+    "node_id",
+    "name",
+    "consequence_position",
+    "owner",
+    "protected_effects"
+  ],
+  "properties": {
+    "node_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "consequence_position": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "protected_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "systems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
