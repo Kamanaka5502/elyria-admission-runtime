@@ -98,7 +98,7 @@ def demo_exposure_graph() -> Dict[str, Any]:
     return build_exposure_graph(DEMO_ASSESSMENTS)
 
 
-@app.get("/demo/proof")
+@app.get("/demo/proof", dependencies=[Depends(require_client_auth)])
 def demo_proof_packet() -> Dict[str, Any]:
     receipts = list_receipts(db_path(), limit=100)
     return {
@@ -109,7 +109,7 @@ def demo_proof_packet() -> Dict[str, Any]:
     }
 
 
-@app.post("/sandbox/reset")
+@app.post("/sandbox/reset", dependencies=[Depends(require_client_auth)])
 def sandbox_reset() -> Dict[str, Any]:
     settings = get_settings()
     path = Path(settings.db_path)
