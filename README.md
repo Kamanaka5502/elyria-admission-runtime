@@ -6,7 +6,7 @@
 
 **Consequence admission before execution binds.**
 
-Elyria Consequence Twin is a working governance sandbox for classifying consequence-bearing movement, attaching evidence references, emitting signed receipts, verifying replay basis, and exposing black-path execution risk before action becomes operationally real.
+Elyria Consequence Twin is a full-stack buyer-facing proof surface for classifying consequence-bearing movement, attaching evidence references, emitting signed receipts, verifying replay basis, and exposing black-path execution risk before action becomes operationally real.
 
 It answers a stricter operational question than ordinary workflow, risk, GRC, process-mining, or AI-governance software:
 
@@ -21,13 +21,14 @@ This repository is bounded at the proof-surface layer.
 Correct claim:
 
 ```text
-Elyria Consequence Twin is a buyer-facing runtime proof surface within Elyria's universal consequence-governance architecture.
+Elyria Consequence Twin is a full-stack buyer-facing runtime proof surface within Elyria's universal consequence-governance architecture.
 ```
 
 See:
 
 ```text
 CLAIM_BOUNDARY.md
+FULL_STACK_SCOPE.md
 REVIEWER_QUICKSTART.md
 BUYER_READOUT.md
 PROOF_OR_DEMO_PATH.md
@@ -38,6 +39,7 @@ LIMITATIONS.md
 
 ```text
 v0.7 Evidence Attachment Layer
+full-stack dashboard/API/engine/storage proof surface
 client mode authentication
 custom movement intake
 structured evidence references
