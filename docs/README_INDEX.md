@@ -10,3 +10,6 @@
 - 07_ip_boundary.md
 - 08_full_stack_system_architecture.md
 - 09_runtime_quickstart.md
+- deploy/sandbox.md
+- deploy/production.md
+- deploy/production_readiness_checklist.md
