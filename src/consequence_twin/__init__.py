@@ -1,5 +1,13 @@
-"""Elyria Consequence Twin starter package."""
+"""Elyria Consequence Twin."""
 
-from .engine import assess_movement, Verdict, AssessmentResult
+from .engine import AssessmentResult, Verdict, assess_movement
+from .receipt_runtime import ReceiptRecord, create_receipt, verify_receipt
 
-__all__ = ["assess_movement", "Verdict", "AssessmentResult"]
+__all__ = [
+    "AssessmentResult",
+    "Verdict",
+    "assess_movement",
+    "ReceiptRecord",
+    "create_receipt",
+    "verify_receipt",
+]
