@@ -88,6 +88,17 @@ def demo_exposure_graph() -> Dict[str, Any]:
     return build_exposure_graph(DEMO_ASSESSMENTS)
 
 
+@app.get("/demo/proof")
+def demo_proof_packet() -> Dict[str, Any]:
+    receipts = list_receipts(DB_PATH, limit=100)
+    return {
+        "service": healthz(),
+        "graph": build_exposure_graph(DEMO_ASSESSMENTS),
+        "receipts": receipts,
+        "proof_claim": "Elyria Consequence Twin classifies consequence-bearing movement, emits receipts, preserves replay basis, and exposes black-path execution risk before consequence binds.",
+    }
+
+
 @app.post("/sandbox/reset")
 def sandbox_reset() -> Dict[str, Any]:
     if DB_PATH.exists():
