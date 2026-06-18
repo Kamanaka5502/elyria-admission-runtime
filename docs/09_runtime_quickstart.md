@@ -24,6 +24,16 @@ Open:
 http://localhost:8080
 ```
 
+## Dashboard Client Token Panel
+
+The dashboard includes a **Client Token Panel**.
+
+- Demo mode works without a token.
+- Client mode requires a token for protected endpoints.
+- The token is stored only in the browser local storage.
+- The dashboard sends the token with protected requests.
+- Use **Clear Token** before screenshots or public demos.
+
 ## Run Docker Sandbox
 
 ```bash
