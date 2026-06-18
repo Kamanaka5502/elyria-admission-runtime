@@ -3,54 +3,195 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elyria Consequence Twin Sandbox</title>
+  <title>Elyria Consequence Twin Executive Demo</title>
   <style>
-    :root { color-scheme: dark; font-family: Inter, system-ui, Arial, sans-serif; background: #061018; color: #e8f8ff; }
+    :root {
+      color-scheme: dark;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: #061018;
+      color: #e8f8ff;
+      --panel: rgba(6, 19, 31, .78);
+      --line: rgba(122,238,255,.34);
+      --cyan: #79efff;
+      --green: #48ff9a;
+      --yellow: #ffe66d;
+      --red: #ff6c6c;
+      --black: #d6e2f2;
+    }
+    * { box-sizing: border-box; }
     body { margin: 0; background: radial-gradient(circle at top, #123247 0%, #061018 55%, #02050a 100%); }
-    header { padding: 42px 6vw 24px; border-bottom: 1px solid rgba(122, 238, 255, .28); }
-    h1 { margin: 0 0 8px; font-size: clamp(32px, 5vw, 64px); letter-spacing: .04em; }
-    .tag { color: #87f0ff; font-weight: 700; }
-    main { padding: 28px 6vw 60px; display: grid; gap: 24px; }
-    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .card { background: rgba(6, 19, 31, .76); border: 1px solid rgba(122,238,255,.32); border-radius: 16px; padding: 18px; box-shadow: 0 0 32px rgba(0,220,255,.08); }
-    button { background: #79efff; color: #021018; border: 0; border-radius: 10px; padding: 12px 16px; font-weight: 800; cursor: pointer; margin-right: 8px; }
+    header { padding: 42px 6vw 26px; border-bottom: 1px solid rgba(122, 238, 255, .28); }
+    h1 { margin: 0 0 10px; font-size: clamp(34px, 5.4vw, 72px); letter-spacing: .04em; line-height: 1.08; }
+    h2, h3 { margin-top: 0; }
+    .tag { color: var(--cyan); font-weight: 900; letter-spacing: .05em; }
+    .lede { max-width: 980px; color: #d6edf8; font-size: 17px; }
+    main { padding: 28px 6vw 70px; display: grid; gap: 24px; }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: 0 0 32px rgba(0,220,255,.08); }
+    .metric { min-height: 136px; }
+    .metric .num { font-size: 44px; font-weight: 950; letter-spacing: .03em; margin: 8px 0; }
+    .metric p { margin: 0; color: #cdeeff; }
+    button { background: var(--cyan); color: #021018; border: 0; border-radius: 10px; padding: 12px 16px; font-weight: 900; cursor: pointer; margin: 6px 8px 6px 0; }
+    button.secondary { background: #10283a; color: var(--cyan); border: 1px solid var(--line); }
     pre { overflow: auto; background: #02070c; border: 1px solid rgba(122,238,255,.22); border-radius: 12px; padding: 14px; max-height: 420px; }
-    .green { color: #48ff9a; } .yellow { color: #ffe66d; } .red { color: #ff6c6c; } .black { color: #d6e2f2; }
+    .green { color: var(--green); } .yellow { color: var(--yellow); } .red { color: var(--red); } .black { color: var(--black); }
+    .warning { border-color: rgba(255,108,108,.58); background: linear-gradient(135deg, rgba(77,10,14,.66), rgba(6,19,31,.76)); display: none; }
+    .warning strong { color: var(--red); }
+    .graph-wrap { overflow-x: auto; }
+    .graph { min-width: 860px; display: grid; grid-template-columns: 1fr 120px 1fr; gap: 18px; align-items: center; }
+    .node { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: rgba(2, 9, 15, .88); margin: 12px 0; }
+    .edge { border-radius: 999px; padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 900; background: rgba(255,255,255,.05); border: 1px solid var(--line); }
+    .edge.green { border-color: var(--green); } .edge.yellow { border-color: var(--yellow); } .edge.red { border-color: var(--red); } .edge.black { border-color: var(--black); }
+    .receipt-list { display: grid; gap: 14px; }
+    .receipt { border: 1px solid var(--line); border-left-width: 6px; border-radius: 14px; padding: 14px; background: rgba(2, 9, 15, .82); }
+    .receipt.green { border-left-color: var(--green); } .receipt.yellow { border-left-color: var(--yellow); } .receipt.red { border-left-color: var(--red); } .receipt.black { border-left-color: var(--black); }
+    .receipt code { color: var(--cyan); }
+    .reason { margin: 6px 0; color: #d6edf8; }
+    .cols { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+    @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <header>
     <div class="tag">ELYRIA CONSEQUENCE TWIN</div>
-    <h1>Sandbox: consequence admission before execution binds.</h1>
-    <p>Run a demo graph, reset sample receipts, and verify replay from the local API.</p>
+    <h1>Executive demo: consequence admission before execution binds.</h1>
+    <p class="lede">A live sandbox for classifying consequence-bearing movement, emitting receipts, replaying verdict basis, and exposing black-path execution risk before action becomes operationally real.</p>
   </header>
   <main>
-    <section class="grid">
-      <div class="card"><h2>Green</h2><p class="green">ADMIT: consequence may bind.</p></div>
-      <div class="card"><h2>Yellow</h2><p class="yellow">HOLD: missing proof.</p></div>
-      <div class="card"><h2>Red</h2><p class="red">REFUSE: blocked movement.</p></div>
-      <div class="card"><h2>Black</h2><p class="black">NO_PROVABLE_ADMISSION: unprovable risk.</p></div>
+    <section class="grid" id="metrics">
+      <div class="card metric"><h3>Total Movements</h3><div class="num" id="m-total">—</div><p>All assessed paths.</p></div>
+      <div class="card metric"><h3>Admit</h3><div class="num green" id="m-admit">—</div><p>May bind consequence.</p></div>
+      <div class="card metric"><h3>Refuse</h3><div class="num red" id="m-refuse">—</div><p>Blocked movement.</p></div>
+      <div class="card metric"><h3>Black Paths</h3><div class="num black" id="m-black">—</div><p>No provable admission.</p></div>
     </section>
+
+    <section class="card warning" id="warning">
+      <h2><strong>Executive Warning:</strong> Black-path consequence exposure detected.</h2>
+      <p>The system found movement attempting to become operationally real without durable proof. This is the surface requiring immediate review before execution is trusted.</p>
+    </section>
+
     <section class="card">
       <button onclick="resetSandbox()">Reset Sandbox + Generate Receipts</button>
-      <button onclick="loadGraph()">Load Exposure Graph</button>
-      <button onclick="loadReceipts()">Load Receipts</button>
+      <button onclick="loadGraph()">Load Visual Exposure Graph</button>
+      <button onclick="loadReceipts()">Load Receipt Cards</button>
+      <button onclick="exportProof()">Export Proof Packet</button>
+      <button class="secondary" onclick="loadRawProof()">Show Raw Proof JSON</button>
     </section>
+
+    <section class="cols">
+      <section class="card">
+        <h2>Consequence Exposure Graph</h2>
+        <div class="graph-wrap"><div id="graph" class="graph">Load graph to render consequence paths.</div></div>
+      </section>
+      <section class="card">
+        <h2>Receipt + Replay Surface</h2>
+        <div id="receipts" class="receipt-list">Reset sandbox, then load receipts.</div>
+      </section>
+    </section>
+
     <section class="card">
       <h2>Output</h2>
       <pre id="out">Ready.</pre>
     </section>
   </main>
+
   <script>
     const out = document.getElementById('out');
-    async function show(url, options) {
+    const graphEl = document.getElementById('graph');
+    const receiptsEl = document.getElementById('receipts');
+    let latestProof = null;
+
+    const colorClass = color => ['green','yellow','red','black'].includes(color) ? color : 'black';
+
+    async function api(url, options) {
       const res = await fetch(url, options);
-      const data = await res.json();
-      out.textContent = JSON.stringify(data, null, 2);
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+      return await res.json();
     }
-    function resetSandbox(){ show('/sandbox/reset', {method:'POST'}); }
-    function loadGraph(){ show('/exposures/demo'); }
-    function loadReceipts(){ show('/receipts'); }
+
+    function show(data) { out.textContent = JSON.stringify(data, null, 2); }
+
+    function updateMetrics(summary) {
+      document.getElementById('m-total').textContent = summary.total_movements ?? 0;
+      document.getElementById('m-admit').textContent = summary.admit ?? 0;
+      document.getElementById('m-refuse').textContent = summary.refuse ?? 0;
+      document.getElementById('m-black').textContent = summary.black_paths ?? 0;
+      document.getElementById('warning').style.display = (summary.black_paths ?? 0) > 0 ? 'block' : 'none';
+    }
+
+    function renderGraph(graph) {
+      updateMetrics(graph.summary);
+      graphEl.innerHTML = graph.edges.map(edge => `
+        <div class="node"><strong>${edge.from}</strong><br><small>source</small></div>
+        <div class="edge ${colorClass(edge.color)}">${edge.verdict}<br>${edge.id}</div>
+        <div class="node"><strong>${edge.to}</strong><br><small class="${colorClass(edge.color)}">${edge.color}</small></div>
+      `).join('');
+    }
+
+    function renderReceipts(items) {
+      if (!items.length) {
+        receiptsEl.textContent = 'No receipts stored yet. Reset sandbox first.';
+        return;
+      }
+      receiptsEl.innerHTML = items.map(r => `
+        <div class="receipt ${colorClass(r.color)}">
+          <h3>${r.verdict} · ${r.movement_id}</h3>
+          <p><code>${r.receipt_id}</code></p>
+          <p>Color: <span class="${colorClass(r.color)}">${r.color}</span></p>
+          ${r.reasons.map(reason => `<div class="reason">• ${reason}</div>`).join('')}
+          <button onclick="replayReceipt('${r.receipt_id}')">Replay Receipt</button>
+        </div>
+      `).join('');
+    }
+
+    async function resetSandbox(){
+      const data = await api('/sandbox/reset', {method:'POST'});
+      latestProof = data;
+      renderGraph(data.graph);
+      renderReceipts(data.receipts);
+      show(data);
+    }
+
+    async function loadGraph(){
+      const data = await api('/exposures/demo');
+      renderGraph(data);
+      show(data);
+    }
+
+    async function loadReceipts(){
+      const data = await api('/receipts');
+      renderReceipts(data.items);
+      show(data);
+    }
+
+    async function replayReceipt(receiptId){
+      const data = await api(`/receipts/${receiptId}/replay`, {method:'POST'});
+      show(data);
+      alert(data.verdict_matches && data.input_hash_matches ? 'Replay verified.' : 'Replay mismatch detected.');
+    }
+
+    async function loadRawProof(){
+      const data = await api('/demo/proof');
+      latestProof = data;
+      renderGraph(data.graph);
+      renderReceipts(data.receipts);
+      show(data);
+    }
+
+    async function exportProof(){
+      const data = latestProof || await api('/demo/proof');
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'elyria-consequence-twin-demo-proof.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    loadGraph().catch(err => out.textContent = err.message);
   </script>
 </body>
 </html>
