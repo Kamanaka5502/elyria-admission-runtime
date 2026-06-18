@@ -4,182 +4,213 @@
 
 # Elyria Consequence Twin
 
-**A digital twin for consequence-bearing execution.**
+**Consequence admission before execution binds.**
 
-Elyria Consequence Twin maps where organizational action can become real, where it must be refused, and what proof must exist before consequence binds.
+Elyria Consequence Twin is a working governance sandbox for classifying consequence-bearing movement, attaching evidence references, emitting signed receipts, verifying replay basis, and exposing black-path execution risk before action becomes operationally real.
 
-Most governance, risk, workflow, and AI oversight tools document what exists, what happened, who approved something, or where controls are mapped.
+It answers a stricter operational question than ordinary workflow, risk, GRC, process-mining, or AI-governance software:
 
-Elyria answers a stricter operational question:
+> Can this action become real right now, under valid authority, active standing, sufficient evidence, preserved custody, refusal logic, receipt, and replay proof?
 
-> Can this action legally, operationally, evidentially, and structurally become real right now?
-
-## Why This Matters
-
-Modern organizations execute thousands of AI, workflow, access, approval, payment, deployment, and customer-operation actions daily.
-
-Most systems track what happened after execution. They do not prove whether the action had standing to become operationally real before consequence bound.
-
-Elyria Consequence Twin exposes where consequence is binding without valid authority, sufficient evidence, preserved custody, active standing, refusal logic, receipt, or replay.
-
-That is the surface where operational failures, governance collapse, AI mis-execution, and unprovable decisions become expensive.
-
-## Core Position
-
-**Know where action becomes consequence before it binds.**
-
-The system models consequence-bearing movement across AI recommendations, operator approvals, payment releases, customer escalations, data access, workflow overrides, model updates, vendor handoffs, policy exceptions, and system deployments.
-
-Each movement is evaluated against:
-
-- authority
-- standing
-- evidence
-- custody
-- admissibility
-- refusal conditions
-- revalidation triggers
-- receipt requirements
-- replay proof
-
-## How the Engine Works
-
-A consequence-bearing movement is evaluated through a deterministic admission pipeline. No movement silently binds. Every missing or invalid dimension becomes **HOLD**, **REFUSE**, or **NO_PROVABLE_ADMISSION**.
-
-```mermaid
-flowchart LR
-    A[Movement Attempt] --> B[Authority Check]
-    B --> C[Standing Check]
-    C --> D[Evidence Check]
-    D --> E[Custody Check]
-    E --> F[Refusal Conditions]
-    F --> G[Revalidation Check]
-    G --> H[Receipt + Replay Check]
-    H --> I{Verdict}
-    I -->|ADMIT| J[Green: Consequence May Bind]
-    I -->|HOLD| K[Yellow: Missing Proof]
-    I -->|REFUSE| L[Red: Blocked Movement]
-    I -->|NO_PROVABLE_ADMISSION| M[Black: Unprovable Risk]
-    J --> N[Consequence Exposure Graph]
-    K --> N
-    L --> N
-    M --> N
-```
-
-### Assessment Pipeline
-
-1. Identify the attempted consequence-bearing movement.
-2. Confirm authority exists and is valid for the movement scope.
-3. Confirm standing is active at bind time.
-4. Confirm required evidence exists before effect.
-5. Confirm custody holds across systems, teams, and handoffs.
-6. Apply refusal and hold conditions.
-7. Check whether material changes require revalidation.
-8. Confirm receipt and replay proof exist.
-9. Emit verdict and graph color.
-
-## Concrete Exposure Graph Example
+## Current Runtime Status
 
 ```text
-AI Recommendation ── MOVE-001 / ADMIT / green ──> Operator Approval
-AI Recommendation ── MOVE-002 / NO_PROVABLE_ADMISSION / black ──> Customer Escalation
-Unscoped Override ── MOVE-003 / REFUSE / red ──> Payment Release
+v0.7 Evidence Attachment Layer
+client mode authentication
+custom movement intake
+structured evidence references
+signed receipt envelope
+receipt replay verification
+current stored exposure graph
+proof packet export
+black-path executive warning
+test suite passing locally
 ```
 
-Example files:
+## What It Proves
 
-- `examples/sample_graph.json`
-- `examples/sample_assessments.json`
-- `examples/sample_results.json`
+Most systems record what happened after execution. Elyria models whether a movement can bind consequence before execution becomes operational reality.
 
-The sample assessment output includes:
+The runtime classifies each movement as:
+
+| Verdict | Color | Meaning |
+|---|---|---|
+| `ADMIT` | green | movement may bind consequence |
+| `HOLD` | yellow | missing or incomplete proof prevents clean admission |
+| `REFUSE` | red | movement is blocked by refusal, invalid authority, or inactive standing |
+| `NO_PROVABLE_ADMISSION` | black | movement is attempting to become real without durable proof |
+
+The black path is the executive risk surface. It shows where action may bind without valid authority, evidence, custody, receipt, or replay basis.
+
+## Core Runtime Path
+
+```text
+movement intake
+-> structured evidence references
+-> deterministic admission verdict
+-> signed receipt
+-> SQLite storage
+-> replay verification
+-> current exposure graph
+-> proof packet export
+```
+
+## Dashboard Capabilities
+
+The local dashboard includes:
+
+```text
+Client Token Panel
+Client Movement Intake
+Evidence Attachment Layer
+Preset Accepted Evidence
+Preset Missing Evidence
+Preset Black Path
+Preset Refusal
+Current Stored Graph
+Receipt Cards
+Replay Receipt
+Export Proof Packet
+Raw Proof JSON
+```
+
+Client mode protects receipt, replay, proof export, sandbox reset, and movement-assessment endpoints behind a bearer token.
+
+## Evidence Attachment Layer
+
+Each client movement can include structured evidence references:
 
 ```json
 {
-  "movement_id": "MOVE-002",
-  "verdict": "NO_PROVABLE_ADMISSION",
-  "color": "black",
-  "reasons": [
-    "consequence path lacks durable receipt or replay proof",
-    "authority appears to admit movement without required evidence",
-    "required evidence missing before bind",
-    "custody not preserved",
-    "receipt unavailable",
-    "replay unavailable"
-  ]
+  "evidence_id": "EV-CLIENT-001",
+  "evidence_type": "policy_record",
+  "source_system": "client.governance.registry",
+  "custody_owner": "operations.owner",
+  "hash_reference": "sha256:client-demo-reference",
+  "required": true,
+  "status": "accepted",
+  "notes": "Required evidence reference for this movement."
 }
 ```
 
-## Flagship Output
+Receipts include an `evidence_summary` showing:
 
-The flagship output is a **Consequence Exposure Graph**:
+```text
+total evidence items
+required evidence count
+accepted evidence count
+missing evidence count
+insufficient evidence count
+custody gaps
+hash/reference count
+source systems
+custody owners
+evidence status
+```
 
-| Color | Meaning |
-|---|---|
-| Green | admissible consequence path |
-| Yellow | hold / missing evidence |
-| Red | refused / no standing |
-| Black | consequence path with no lawful or provable admission |
+The evidence summary is included inside the signed receipt envelope and verified during replay.
 
-The black path is the executive risk surface. It shows where action is becoming real without valid authority, sufficient evidence, preserved custody, active standing, or replayable proof.
+## API Surface
 
-## Initial Commercial Offer
+```text
+GET  /healthz
+POST /movements/assess
+GET  /receipts
+GET  /receipts/{receipt_id}
+POST /receipts/{receipt_id}/replay
+GET  /exposures/demo
+GET  /exposures/current
+GET  /demo/proof
+POST /sandbox/reset
+```
+
+Protected in client mode:
+
+```text
+POST /movements/assess
+GET  /receipts
+GET  /receipts/{receipt_id}
+POST /receipts/{receipt_id}/replay
+GET  /exposures/current
+GET  /demo/proof
+POST /sandbox/reset
+```
+
+## Run Locally
+
+```bash
+cd elyria-consequence-twin
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m pytest tests
+uvicorn apps.api.main:app --reload --host 0.0.0.0 --port 8080
+```
+
+Open:
+
+```text
+http://localhost:8080
+```
+
+## Client Mode
+
+```bash
+export ELYRIA_MODE=client
+export ELYRIA_API_TOKEN="replace-with-local-demo-token"
+export ELYRIA_RECEIPT_SIGNING_SECRET="replace-with-local-signing-secret"
+uvicorn apps.api.main:app --reload --host 0.0.0.0 --port 8080
+```
+
+In the browser:
+
+```text
+enter token
+Save Token Locally
+Test Protected Access
+Reset Sandbox + Generate Receipts
+Preset Accepted Evidence or Preset Missing Evidence
+Submit Movement + Emit Receipt
+Load Current Stored Graph
+Load Receipt Cards
+Replay Receipt
+Export Proof Packet
+```
+
+Do not commit or screenshot real tokens, signing secrets, client evidence, private hashes, or live client identifiers.
+
+## Demo Script and Packaging Docs
+
+```text
+docs/10_executive_demo_script.md
+docs/11_buyer_one_page.md
+docs/12_demo_screenshot_and_proof_safety.md
+examples/public_demo_proof_packet.example.json
+```
+
+## Commercial Offer
 
 ### Consequence Twin Scan
 
-A 7–10 day operational diagnostic that maps where AI, workflow, access, approval, payment, deployment, or customer-operation actions may bind consequence without sufficient authority, evidence, custody, standing, or replay.
+A 7-10 day operational diagnostic that maps where AI, workflow, access, approval, payment, deployment, or customer-operation actions may bind consequence without sufficient authority, evidence, custody, standing, receipt, or replay proof.
 
-### Deliverables
-
-1. Consequence Binding Map
-2. Consequence Exposure Graph
-3. Authority Collapse Report
-4. Evidence Gap Register
-5. AI / Workflow Action Exposure Map
-6. Refusal Conditions Matrix
-7. Revalidation Trigger Map
-8. Executive Consequence Risk Brief
-9. Implementation Blueprint
-
-## Commercial Structure
-
-| Offer | Price Range |
-|---|---:|
-| Diagnostic Scan | $7,500-$15,000 |
-| Implementation Pilot | $25,000-$75,000 |
-| Runtime Layer | scoped after pilot validation |
-
-## Repository Contents
+Deliverables can include:
 
 ```text
-commercial/       sellable offer pages, scope, SOW starter, pricing, client language
-docs/             architecture, methodology, proof model, operating doctrine
-templates/        client-facing diagnostic deliverable templates
-schemas/          JSON schemas for nodes, edges, assessments, receipts, and exposure graphs
-src/              minimal deterministic assessment engine for demo/pilot scaffolding
-tests/            proof-oriented unit tests
-examples/         sample consequence paths and diagnostic data
-assets/           front-page visual identity and diagrams
+Consequence Binding Map
+Consequence Exposure Graph
+Authority Collapse Report
+Evidence Gap Register
+AI / Workflow Action Exposure Map
+Refusal Conditions Matrix
+Revalidation Trigger Map
+Executive Consequence Risk Brief
+Implementation Blueprint
 ```
 
-## Run the Starter Engine
+## Repository Boundary
 
-```bash
-python -m consequence_twin.cli examples/sample_assessments.json
-```
-
-Expected verdict classes:
-
-```text
-ADMIT
-HOLD
-REFUSE
-NO_PROVABLE_ADMISSION
-```
-
-## Execution Boundary
-
-This repository is a commercial and technical scaffold. It is not the full Elyria runtime, private artifact estate, or proprietary proof corridor. It defines the sellable diagnostic surface and a starter implementation lane while preserving deeper runtime IP boundaries.
+This repository is a commercial and technical scaffold. It is not the full private Elyria runtime, private artifact estate, or proprietary proof corridor. It defines the sellable diagnostic surface and a starter implementation lane while preserving deeper runtime IP boundaries.
 
 ## Ownership Notice
 
