@@ -1,0 +1,35 @@
+{
+  "allowed_authority_scopes": [
+    "customer_admin",
+    "runtime_reviewer",
+    "authorized_operator"
+  ],
+  "allowed_movement_types": [
+    "governed_release",
+    "proof_export",
+    "admission_review"
+  ],
+  "custody_required": true,
+  "no_bind_rules": {
+    "held_movement": "close_protected_route",
+    "refused_movement": "emit_no_bind_proof"
+  },
+  "policy_pack_id": "basic_customer_corridor",
+  "refusal_rules": {
+    "blocking_codes": [
+      "revoked_authority",
+      "expired_standing",
+      "protected_scope_violation"
+    ]
+  },
+  "replay_rules": {
+    "changed_conditions": "new_receipt_required",
+    "same_conditions": "same_result_required"
+  },
+  "required_evidence": [
+    "authority_record",
+    "standing_record",
+    "custody_hash"
+  ],
+  "version": "1.0.0"
+}
