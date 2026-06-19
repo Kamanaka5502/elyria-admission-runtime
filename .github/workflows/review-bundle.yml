@@ -1,0 +1,31 @@
+name: review-bundle
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'review-bundle/**'
+      - 'external_verifier/**'
+      - 'scripts/generate_digest_manifest.py'
+      - 'scripts/verify_digest_manifest.py'
+
+jobs:
+  verify-review-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -e .
+      - name: Generate digest manifest
+        run: python scripts/generate_digest_manifest.py review-bundle/latest
+      - name: Verify digest manifest
+        run: python scripts/verify_digest_manifest.py review-bundle/latest
+      - name: Run external verifier
+        run: python external_verifier/verify_bundle.py review-bundle/latest
