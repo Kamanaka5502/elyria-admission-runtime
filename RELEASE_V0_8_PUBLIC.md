@@ -14,3 +14,5 @@ Full-stack consequence runtime, not production certification.
 Universal architecture layer, bounded public repo claim.
 Samantha Revita / Elyria Systems.
 ```
+
+Release posture: ready for controlled public portfolio visibility after local test confirmation.
