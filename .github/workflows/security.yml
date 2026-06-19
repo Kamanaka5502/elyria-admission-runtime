@@ -1,0 +1,37 @@
+name: security
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'scripts/**'
+      - '.github/workflows/security.yml'
+      - 'SECURITY_POSTURE.md'
+      - 'DEPLOYMENT_SECURITY_CHECKLIST.md'
+      - 'THREAT_MODEL.md'
+
+jobs:
+  security-review-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -e .
+      - name: Run tests
+        run: python -m pytest
+      - name: Production preflight review mode
+        run: python scripts/production_preflight.py --mode review
+      - name: Security posture files present
+        run: |
+          test -f SECURITY_POSTURE.md
+          test -f DEPLOYMENT_SECURITY_CHECKLIST.md
+          test -f THREAT_MODEL.md
