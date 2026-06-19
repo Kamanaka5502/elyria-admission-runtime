@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/consequence-admission-before-execution-binds.jpg" alt="Elyria Consequence Twin — Consequence Admission Before Execution Binds" width="100%" />
+  <img src="assets/consequence-exposure-graph.svg" alt="Elyria Consequence Twin — Consequence Admission Before Execution Binds" width="100%" />
 </p>
 
 # Elyria Consequence Twin
