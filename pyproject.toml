@@ -1,16 +1,22 @@
 [project]
-name = "elyria-consequence-twin"
-version = "0.1.0"
-description = "A digital twin scaffold for consequence-bearing execution diagnostics."
+name = "elyria-admission-runtime"
+version = "0.8.1"
+description = "A full-stack consequence-admission runtime for evidence-gated verdicts, signed receipts, replay verification, and exposure graphing."
 authors = [{ name = "Samantha Revita" }]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "pydantic>=2.8.0",
+  "httpx>=0.28.0",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0.0"]
 
 [project.scripts]
-consequence-twin = "consequence_twin.cli:main"
+elyria-admission-runtime = "consequence_twin.cli:main"
+admission-runtime = "consequence_twin.cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
