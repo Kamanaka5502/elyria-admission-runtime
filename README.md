@@ -82,6 +82,38 @@ Proof packet exports.
 Tests pass locally.
 ```
 
+## ◈ Container Install
+
+The repo can also run as an installable dashboard/API container.
+
+Local container build:
+
+```bash
+docker build -t elyria-consequence-twin:local .
+docker run --rm -p 8080:8080 elyria-consequence-twin:local
+```
+
+After the GitHub Container Registry package is published, reviewers can run:
+
+```bash
+docker pull ghcr.io/kamanaka5502/elyria-consequence-twin:v0.8.1-public
+docker run --rm -p 8080:8080 ghcr.io/kamanaka5502/elyria-consequence-twin:v0.8.1-public
+```
+
+Open:
+
+```text
+http://localhost:8080
+```
+
+Container posture:
+
+```text
+source review remains proprietary
+container distribution does not grant reuse rights
+production use requires a separate written agreement
+```
+
 ## ◈ Engine Flow
 
 The Consequence Twin evaluates whether movement may bind operational consequence. It does not wait for harm, drift, or audit discovery after the fact; it classifies movement before execution becomes real.
