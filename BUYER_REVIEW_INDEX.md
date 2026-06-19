@@ -10,7 +10,7 @@ It points a buyer, reviewer, recruiter, technical evaluator, or implementation p
 
 ```text
 Implementation: complete across Phases 1-4
-Verification: pending CI and fresh-clone evidence
+Verification: CI evidence recorded; fresh-clone evidence pending
 Public posture: bounded buyer-review runtime candidate
 Production deployment: subject to customer review and external review where required
 ```
@@ -46,8 +46,12 @@ RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS
 | `A_PLUS_VERIFICATION_GATE.md` | final evidence gate before A+ wording |
 | `REVIEWER_VERIFICATION.md` | reviewer command path |
 | `RELEASE_CHECKLIST.md` | release naming and bounded wording |
+| `RELEASE_NOTES_V0_8_1_PUBLIC.md` | public release notes |
+| `RELEASE_PUBLICATION_STEPS.md` | GitHub release publication steps |
 | `FRESH_CLONE_REVIEW_TEST.md` | clean-clone verification procedure |
 | `VERIFICATION_EVIDENCE_TEMPLATE.md` | evidence capture template |
+| `verification-evidence/CI_155_SUMMARY.md` | CI #155 verification summary |
+| `verification-evidence/ci-155-verification-report.json` | machine-readable CI report evidence |
 
 ## Phase 1 — Enterprise Hardening Foundation
 
@@ -168,4 +172,4 @@ Safe current wording:
 Elyria Admission Runtime is a bounded buyer-review consequence-admission runtime candidate with implemented proof-gate layers across access control, tenant boundary, signed receipt review, audit-chain review, policy-pack mapping, no-bind proof, route closure, changed-condition replay, external verifier review, digest verification, and production preflight review mode.
 ```
 
-Final A+ wording should wait until CI and fresh-clone evidence are recorded in the final verification gate.
+Final A+ wording should wait until fresh-clone evidence and release evidence are recorded in the final verification gate.
