@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "actor_id": "review-runtime",
+      "event_hash": "2194c9f7212cc09a0ea527fd035217bee97d706d746b5b39d99964317bc51f14",
+      "event_id": "AUD-REVIEW-001",
+      "event_type": "movement recorded",
+      "payload_hash": "6f613215f2ea9a718f14ae693297f0d53659c84f75f3fcf3720104ae396f310b",
+      "previous_hash": "GENESIS",
+      "tenant_id": "tenant-review",
+      "timestamp_utc": "2026-06-19T18:00:00+00:00"
+    },
+    {
+      "actor_id": "review-runtime",
+      "event_hash": "b464014b3ae82de34693120d0be96842bbe5630574a120813f9e00d469e720cb",
+      "event_id": "AUD-REVIEW-002",
+      "event_type": "verdict recorded",
+      "payload_hash": "ca1f677cef219073d4b326d9ebe3e1f3a59c43bb37a55d65d0869ec339f1ebc2",
+      "previous_hash": "2194c9f7212cc09a0ea527fd035217bee97d706d746b5b39d99964317bc51f14",
+      "tenant_id": "tenant-review",
+      "timestamp_utc": "2026-06-19T18:01:00+00:00"
+    },
+    {
+      "actor_id": "review-runtime",
+      "event_hash": "7bb78e2bb9b4cf48be21e1e5e2189376ba3013c80c29d09023ae569964a3e045",
+      "event_id": "AUD-REVIEW-003",
+      "event_type": "receipt recorded",
+      "payload_hash": "906287ca91b258922b5ac5b67e65cd4eb5e64e33809ee12f510c8b8fdd2d551d",
+      "previous_hash": "b464014b3ae82de34693120d0be96842bbe5630574a120813f9e00d469e720cb",
+      "tenant_id": "tenant-review",
+      "timestamp_utc": "2026-06-19T18:02:00+00:00"
+    }
+  ]
+}
