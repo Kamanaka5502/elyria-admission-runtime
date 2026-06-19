@@ -1,8 +1,9 @@
 FROM python:3.12-slim
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    ELYRIA_DB_PATH=/data/elyria.db
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV ELYRIA_MODE=demo
+ENV ELYRIA_DB_PATH=/app/data/elyria.db
 
 WORKDIR /app
 
@@ -10,9 +11,10 @@ COPY requirements.txt pyproject.toml ./
 COPY src ./src
 COPY apps ./apps
 
-RUN pip install --no-cache-dir -r requirements.txt && pip install --no-cache-dir -e .
-
-RUN mkdir -p /data
+RUN python -m pip install --upgrade pip \
+    && python -m pip install --no-cache-dir -r requirements.txt \
+    && python -m pip install --no-cache-dir -e . \
+    && mkdir -p /app/data
 
 EXPOSE 8080
 
