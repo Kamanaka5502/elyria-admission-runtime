@@ -1,16 +1,16 @@
-# Elyria Consequence Twin v0.8 Public Release
+# Elyria Admission Runtime v0.8.1 Public Release
 
 ```text
-Public release v0.8 consequence runtime
+Public release v0.8.1 admission runtime
 Samantha Revita / Elyria Systems
 ```
 
-This marker records the public release posture for the v0.8 consequence runtime.
+This marker records the public release posture for Elyria Admission Runtime.
 
 Core position:
 
 ```text
-Full-stack consequence runtime, not production certification.
+Full-stack admission runtime, not production certification.
 Universal architecture layer, bounded public repo claim.
 Samantha Revita / Elyria Systems.
 ```
