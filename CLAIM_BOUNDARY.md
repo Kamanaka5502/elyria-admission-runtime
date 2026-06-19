@@ -2,7 +2,7 @@
 
 ## This repo claims
 
-This repo demonstrates a bounded full-stack buyer-facing proof surface for Elyria's universal consequence-governance architecture.
+This repo demonstrates a bounded full-stack consequence-admission runtime and buyer-facing product scaffold for Elyria's universal consequence-governance architecture.
 
 It proves that a consequence-bearing movement can be:
 
@@ -33,9 +33,9 @@ It proves that a consequence-bearing movement can be:
 
 Elyria is universal at the architecture layer.
 
-This repository is bounded at the proof-surface layer.
+This repository is bounded at the public runtime/product-demo layer.
 
-The public claim is conservative: this repo demonstrates one full-stack consequence-admission sandbox within the larger Elyria consequence-governance architecture.
+The public claim is conservative: this repo demonstrates one full-stack consequence-admission runtime scaffold within the larger Elyria consequence-governance architecture.
 
 ## Full-stack boundary
 
