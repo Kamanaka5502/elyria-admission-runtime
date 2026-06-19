@@ -5,18 +5,18 @@
 # Elyria Consequence Twin
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.8_Evidence_Gate-0B2233?style=for-the-badge&labelColor=071928&color=37E6FF" />
-  <img alt="Stack" src="https://img.shields.io/badge/full--stack-dashboard_%7C_API_%7C_engine_%7C_storage-0B2233?style=for-the-badge&labelColor=071928&color=00FF9D" />
-  <img alt="Runtime" src="https://img.shields.io/badge/runtime-demo--ready-0B2233?style=for-the-badge&labelColor=071928&color=8FFFC4" />
-  <img alt="Boundary" src="https://img.shields.io/badge/boundary-no_production_overclaim-0B2233?style=for-the-badge&labelColor=071928&color=FFD36C" />
+  <img alt="Proof Layer" src="https://img.shields.io/badge/PROOF_LAYER-CONSEQUENCE_ADMISSION-071928?style=for-the-badge&labelColor=02070D&color=37E6FF" />
+  <img alt="Boundary Gate" src="https://img.shields.io/badge/BOUNDARY_GATE-AUTHORITY_%2B_STANDING_%2B_EVIDENCE_%2B_CUSTODY-071928?style=for-the-badge&labelColor=02070D&color=00FF9D" />
+  <img alt="Evidence Gate" src="https://img.shields.io/badge/EVIDENCE_GATE-ENFORCEMENT_BEARING-071928?style=for-the-badge&labelColor=02070D&color=8FFFC4" />
+  <img alt="Black Path" src="https://img.shields.io/badge/BLACK_PATH-NO_PROVABLE_ADMISSION-071928?style=for-the-badge&labelColor=02070D&color=FF4B67" />
 </p>
 
 <p align="center">
-  <img alt="Python" src="https://img.shields.io/badge/Python-3.11%2B-0B2233?style=flat-square&logo=python&logoColor=white&labelColor=071928&color=37E6FF" />
-  <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-API-0B2233?style=flat-square&logo=fastapi&logoColor=white&labelColor=071928&color=00FF9D" />
-  <img alt="SQLite" src="https://img.shields.io/badge/SQLite-storage-0B2233?style=flat-square&logo=sqlite&logoColor=white&labelColor=071928&color=8FFFC4" />
-  <img alt="Pytest" src="https://img.shields.io/badge/pytest-reviewer_path-0B2233?style=flat-square&logo=pytest&logoColor=white&labelColor=071928&color=FFD36C" />
-  <img alt="Owner" src="https://img.shields.io/badge/Samantha_Revita-Elyria_Systems-0B2233?style=flat-square&labelColor=071928&color=9CF7FF" />
+  <img alt="Signed Receipts" src="https://img.shields.io/badge/SIGNED_RECEIPTS-HMAC_SHA256_ENVELOPE-0B2233?style=flat-square&labelColor=071928&color=9CF7FF" />
+  <img alt="Replay Basis" src="https://img.shields.io/badge/REPLAY_BASIS-VERDICT_%2B_INPUT_%2B_EVIDENCE-0B2233?style=flat-square&labelColor=071928&color=37E6FF" />
+  <img alt="Runtime" src="https://img.shields.io/badge/FULL_STACK-DASHBOARD_API_ENGINE_STORAGE-0B2233?style=flat-square&labelColor=071928&color=00FF9D" />
+  <img alt="Reviewer Path" src="https://img.shields.io/badge/REVIEWER_PATH-FRESH_CLONE_%2B_TESTS-0B2233?style=flat-square&labelColor=071928&color=FFD36C" />
+  <img alt="Owner" src="https://img.shields.io/badge/SAMANTHA_REVITA-ELYRIA_SYSTEMS-0B2233?style=flat-square&labelColor=071928&color=9CF7FF" />
 </p>
 
 ## ◈ Position
