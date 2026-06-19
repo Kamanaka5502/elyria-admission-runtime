@@ -1,6 +1,6 @@
 # Proprietary Notice
 
-This repository is owned by Samantha Revita-Wagner / Elyria Systems.
+This repository is owned by Samantha Revita / Elyria Systems.
 
 It contains proprietary commercial positioning, diagnostic methodology, governance architecture, template structures, proof-surface language, and implementation scaffolding for Elyria Consequence Twin.
 
