@@ -1,39 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760">
-<rect width="1400" height="760" fill="#071928"/>
-<rect x="30" y="30" width="1340" height="700" rx="26" fill="#0b2233" stroke="#46e6ff" stroke-width="3"/>
-<text x="60" y="88" fill="#f5fbff" font-family="Arial" font-size="42" font-weight="700">CONSEQUENCE ADMISSION BEFORE EXECUTION BINDS</text>
-<text x="62" y="122" fill="#a8c7d6" font-family="Arial" font-size="18" letter-spacing="3">THE ELYRIA CONSEQUENCE TWIN</text>
-<rect x="60" y="165" width="190" height="500" rx="12" fill="#0c2a38" stroke="#5defff"/>
-<text x="90" y="225" fill="#dffbff" font-family="Arial" font-size="21" font-weight="700">FULL-STACK</text>
-<text x="90" y="255" fill="#dffbff" font-family="Arial" font-size="21" font-weight="700">BUYER-FACING</text>
-<text x="90" y="285" fill="#dffbff" font-family="Arial" font-size="21" font-weight="700">RUNTIME</text>
-<text x="90" y="315" fill="#dffbff" font-family="Arial" font-size="21" font-weight="700">PROOF SURFACE</text>
-<text x="90" y="430" fill="#8fffc4" font-family="Arial" font-size="24" font-weight="700">ELYRIA</text>
-<text x="90" y="462" fill="#8fffc4" font-family="Arial" font-size="24" font-weight="700">CONSEQUENCE</text>
-<text x="90" y="494" fill="#8fffc4" font-family="Arial" font-size="24" font-weight="700">TWIN</text>
-<g fill="#0c2a38" stroke="#5defff"><rect x="310" y="160" width="210" height="58" rx="8"/><rect x="310" y="235" width="210" height="58" rx="8"/><rect x="310" y="310" width="210" height="58" rx="8"/><rect x="310" y="385" width="210" height="58" rx="8"/><rect x="310" y="460" width="210" height="58" rx="8"/><rect x="310" y="535" width="210" height="58" rx="8"/><rect x="310" y="610" width="210" height="58" rx="8"/></g>
-<g fill="#dffbff" font-family="Arial" font-size="20" font-weight="700"><text x="334" y="196">AUTHORITY</text><text x="334" y="271">STANDING</text><text x="334" y="346">EVIDENCE</text><text x="334" y="421">CUSTODY</text><text x="334" y="496">REFUSAL LOGIC</text><text x="334" y="571">SIGNED RECEIPT</text><text x="334" y="646">REPLAY BASIS</text></g>
-<g stroke="#00ff9d" stroke-width="6" fill="none"><path d="M520 190 C600 210 660 270 720 350"/><path d="M520 265 C600 270 665 310 720 350"/><path d="M520 340 C610 342 665 345 720 350"/><path d="M520 415 C610 405 665 375 720 350"/><path d="M520 490 C600 465 665 400 720 350"/><path d="M520 565 C600 515 665 430 720 350"/><path d="M520 640 C600 565 665 445 720 350"/></g>
-<rect x="650" y="295" width="210" height="120" rx="16" fill="#3b0b15" stroke="#ff5870" stroke-width="3"/>
-<text x="682" y="348" fill="#ff6b83" font-family="Arial" font-size="22" font-weight="700">PROPOSED</text>
-<text x="682" y="378" fill="#ff6b83" font-family="Arial" font-size="22" font-weight="700">MOVEMENT</text>
-<rect x="650" y="465" width="260" height="72" rx="12" fill="#092133" stroke="#4defff"/>
-<text x="678" y="494" fill="#b9eeff" font-family="Arial" font-size="13" font-weight="700">ELYRIA CONSEQUENCE TWIN</text>
-<text x="678" y="522" fill="#dffbff" font-family="Arial" font-size="22" font-weight="700">BINDING PROOF SURFACE</text>
-<rect x="890" y="145" width="250" height="500" rx="20" fill="#102738" stroke="#6ef3ff" stroke-width="3"/>
-<text x="948" y="330" fill="#a9d8e9" font-family="Arial" font-size="17" font-weight="700">AUTHORITY</text>
-<text x="948" y="360" fill="#a9d8e9" font-family="Arial" font-size="17" font-weight="700">EVIDENCE</text>
-<text x="948" y="390" fill="#a9d8e9" font-family="Arial" font-size="17" font-weight="700">CUSTODY</text>
-<text x="948" y="420" fill="#a9d8e9" font-family="Arial" font-size="17" font-weight="700">REPLAY</text>
-<path d="M745 320 C690 220 630 160 570 120" stroke="#ff3659" stroke-width="5" fill="none" stroke-dasharray="8 8"/>
-<text x="575" y="118" fill="#ff6b83" font-family="Arial" font-size="22" font-weight="700">THE BLACK PATH</text>
-<g stroke="#00ff9d" stroke-width="6" fill="none"><path d="M1140 350 C1210 310 1260 265 1325 240"/><path d="M1140 350 C1210 350 1260 350 1325 350"/><path d="M1140 350 C1210 390 1260 435 1325 480"/></g>
-<text x="1180" y="310" fill="#8fffc4" font-family="Arial" font-size="24" font-weight="700">ADMITTED</text>
-<text x="1180" y="340" fill="#8fffc4" font-family="Arial" font-size="24" font-weight="700">AND EXECUTED</text>
-<text x="1180" y="370" fill="#8fffc4" font-family="Arial" font-size="24" font-weight="700">REALITY</text>
-<rect x="1160" y="535" width="190" height="110" rx="10" fill="#092133" stroke="#4defff"/>
-<text x="1182" y="568" fill="#a9d8e9" font-family="Arial" font-size="15" font-weight="700">CONSEQUENCE</text>
-<text x="1182" y="592" fill="#a9d8e9" font-family="Arial" font-size="15" font-weight="700">EXPOSURE GRAPH</text>
-<path d="M1188 623 C1225 560 1288 565 1322 625" stroke="#ff4b67" stroke-width="4" fill="none"/>
-<text x="60" y="710" fill="#a9d8e9" font-family="Arial" font-size="16">Full-stack runtime proof surface • boundary-gated movement • signed receipt • replay verification</text>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EAFBFF"/><stop offset="34%" stop-color="#DDF7FF"/><stop offset="68%" stop-color="#F6EFFF"/><stop offset="100%" stop-color="#F7FFFB"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/><stop offset="45%" stop-color="#EAFBFF" stop-opacity="0.82"/><stop offset="100%" stop-color="#F7EEFF" stop-opacity="0.86"/></linearGradient>
+<linearGradient id="cyan" x1="0" x2="1"><stop offset="0%" stop-color="#38DFFF"/><stop offset="50%" stop-color="#92F7FF"/><stop offset="100%" stop-color="#C9A8FF"/></linearGradient>
+<linearGradient id="green" x1="0" x2="1"><stop offset="0%" stop-color="#00DFA4"/><stop offset="50%" stop-color="#7DFFD8"/><stop offset="100%" stop-color="#B4F8FF"/></linearGradient>
+<linearGradient id="blackpath" x1="0" x2="1"><stop offset="0%" stop-color="#FF4D7A"/><stop offset="50%" stop-color="#FF8AA6"/><stop offset="100%" stop-color="#C9A8FF"/></linearGradient>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#7BDFF2" flood-opacity="0.25"/></filter>
+<style>
+.title{font-family:Arial,Helvetica,sans-serif;font-size:54px;font-weight:900;letter-spacing:1px;fill:#082A3A}.sub{font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:800;letter-spacing:4px;fill:#34627A}.label{font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:900;fill:#0A3346}.small{font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:800;fill:#315C70}.tiny{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:800;fill:#3E7084}.panel{fill:url(#panel);stroke:#75E9FF;stroke-width:2}.box{fill:#FFFFFF;stroke:#7EEBFF;stroke-width:2;opacity:.94}.lineg{stroke:url(#green);stroke-width:8;fill:none;stroke-linecap:round;opacity:.92}.liner{stroke:url(#blackpath);stroke-width:6;fill:none;stroke-linecap:round;opacity:.9}.dash{stroke-dasharray:10 10}.ok{fill:#009F7C}.bad{fill:#D82255}.boldwhite{font-family:Arial,Helvetica,sans-serif;font-size:27px;font-weight:900;fill:#FFFFFF}.center{font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:900;fill:#082A3A}
+</style>
+</defs>
+<rect width="1400" height="760" fill="url(#bg)"/>
+<path d="M90 80 C260 10 430 150 620 72 C810 -8 950 122 1130 58 C1240 18 1320 44 1370 78" stroke="#B7F4FF" stroke-width="8" fill="none" opacity=".45"/>
+<path d="M30 655 C260 590 370 730 560 660 C760 585 910 720 1110 650 C1240 608 1320 620 1370 648" stroke="#E3C7FF" stroke-width="10" fill="none" opacity=".46"/>
+<rect x="30" y="30" width="1340" height="700" rx="30" fill="none" stroke="#FFFFFF" stroke-width="4" opacity=".85"/>
+<text x="54" y="88" class="title">CONSEQUENCE ADMISSION BEFORE EXECUTION BINDS</text>
+<text x="58" y="126" class="sub">THE ELYRIA CONSEQUENCE TWIN</text>
+<g transform="translate(52 168)" filter="url(#shadow)">
+<rect class="panel" width="222" height="492" rx="18"/>
+<text x="28" y="58" class="label">FULL-STACK</text>
+<text x="28" y="92" class="label">BUYER-FACING</text>
+<text x="28" y="126" class="label">RUNTIME</text>
+<text x="28" y="160" class="label">PROOF SURFACE</text>
+<text x="28" y="282" class="label" fill="#008C7A">ELYRIA</text>
+<text x="28" y="318" class="label" fill="#008C7A">CONSEQUENCE</text>
+<text x="28" y="354" class="label" fill="#008C7A">TWIN</text>
+<text x="24" y="432" class="tiny">Universal architecture layer</text>
+<text x="24" y="456" class="tiny">Bounded public repo claim</text>
+</g>
+<g transform="translate(330 156)" filter="url(#shadow)">
+<g><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">AUTHORITY</text></g>
+<g transform="translate(0 76)"><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">STANDING</text></g>
+<g transform="translate(0 152)"><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">EVIDENCE</text></g>
+<g transform="translate(0 228)"><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">CUSTODY</text></g>
+<g transform="translate(0 304)"><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">REFUSAL</text></g>
+<g transform="translate(0 380)"><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">RECEIPT</text></g>
+<g transform="translate(0 456)"><rect class="box" width="220" height="60" rx="12"/><text x="24" y="39" class="label">REPLAY</text></g>
+</g>
+<g filter="url(#glow)"><path class="lineg" d="M550 186 C620 205 682 270 742 348"/><path class="lineg" d="M550 262 C630 268 688 312 742 348"/><path class="lineg" d="M550 338 C630 340 688 346 742 348"/><path class="lineg" d="M550 414 C630 402 688 376 742 348"/><path class="lineg" d="M550 490 C630 462 688 402 742 348"/><path class="lineg" d="M550 566 C630 518 688 430 742 348"/><path class="lineg" d="M550 642 C630 570 688 450 742 348"/></g>
+<g transform="translate(660 284)" filter="url(#shadow)"><rect width="220" height="128" rx="20" fill="#FFFFFF" stroke="#FF6F95" stroke-width="3"/><text x="32" y="56" class="label bad">PROPOSED</text><text x="32" y="90" class="label bad">MOVEMENT</text></g>
+<g transform="translate(650 462)" filter="url(#shadow)"><rect class="panel" width="292" height="82" rx="16"/><text x="28" y="34" class="tiny">ELYRIA CONSEQUENCE TWIN</text><text x="28" y="64" class="center">BINDING PROOF SURFACE</text></g>
+<g transform="translate(905 145)" filter="url(#shadow)"><rect width="250" height="510" rx="26" fill="#FFFFFF" stroke="#8AF0FF" stroke-width="4" opacity=".95"/><text x="58" y="218" class="small">AUTHORITY</text><text x="58" y="252" class="small">EVIDENCE</text><text x="58" y="286" class="small">CUSTODY</text><text x="58" y="320" class="small">REPLAY</text><text x="58" y="354" class="small">VERDICT</text></g>
+<path class="liner dash" d="M762 320 C696 220 632 166 576 122" filter="url(#glow)"/>
+<text x="592" y="118" class="label bad">THE BLACK PATH</text>
+<g filter="url(#glow)"><path class="lineg" d="M1155 350 C1218 315 1264 270 1330 240"/><path class="lineg" d="M1155 350 C1222 352 1270 352 1332 352"/><path class="lineg" d="M1155 350 C1218 390 1264 438 1330 486"/></g>
+<text x="1190" y="312" class="label ok">ADMITTED</text><text x="1190" y="346" class="label ok">EXECUTED</text><text x="1190" y="380" class="label ok">REALITY</text>
+<g transform="translate(1160 530)" filter="url(#shadow)"><rect class="panel" width="190" height="116" rx="14"/><text x="22" y="36" class="small">CONSEQUENCE</text><text x="22" y="62" class="small">EXPOSURE GRAPH</text><path d="M25 96 C70 28 126 30 165 96" stroke="#FF4D7A" stroke-width="5" fill="none"/></g>
+<text x="54" y="710" class="small">Full-stack runtime proof surface  •  Evidence-gated admission  •  Signed receipt  •  Replay verification  •  Black-path exposure</text>
 </svg>
