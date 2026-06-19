@@ -1,0 +1,63 @@
+Elyria Proprietary Source-Available License
+Version 1.0
+
+Copyright (c) 2026 Samantha Revita / Elyria Systems.
+All rights reserved.
+
+1. Ownership
+
+This repository, including its source code, documentation, architecture, terminology, runtime logic, examples, proof structures, diagrams, naming, and related materials, is owned by Samantha Revita / Elyria Systems unless otherwise stated in writing.
+
+No ownership interest, copyright transfer, patent license, trademark license, trade-secret license, or commercial right is granted by making this repository public.
+
+2. Permitted Use
+
+You may view this repository for review, evaluation, portfolio inspection, technical assessment, recruiting review, and private non-production demonstration.
+
+You may clone and run the repository locally only for review, evaluation, or private demonstration of the public demo surface.
+
+3. Restrictions
+
+Without prior express written permission from Samantha Revita / Elyria Systems, you may not:
+
+- copy, redistribute, publish, mirror, or rehost this repository or substantial portions of it;
+- modify, adapt, merge, fork for derivative use, or create derivative works;
+- use the repository or its contents in production systems;
+- sell, rent, license, sublicense, package, or commercially offer any part of the repository;
+- use the repository to build a competing or substantially similar product, service, runtime, framework, evaluator, governance layer, or proof system;
+- use the repository, documentation, examples, diagrams, or proof structures to train, fine-tune, evaluate, benchmark, or augment machine-learning models or datasets;
+- remove attribution, proprietary notices, claim-boundary statements, or authorship references;
+- represent the repository as production-certified, customer-certified, regulated-compliance-approved, or externally certified unless a separate written certification exists.
+
+4. No Public License Grant
+
+This is not an open-source license. No rights are granted under MIT, Apache, GPL, BSD, Creative Commons, or any other public open-source or open-content license unless a separate written license is provided by Samantha Revita / Elyria Systems.
+
+The public visibility of this repository allows inspection only. It does not permit reuse, copying, modification, commercial exploitation, machine-learning training use, or derivative work creation.
+
+5. Commercial Use
+
+Commercial use requires a separate written agreement signed or otherwise expressly authorized by Samantha Revita / Elyria Systems.
+
+Commercial use includes, but is not limited to, implementation, integration, deployment, consulting use, customer delivery, resale, inclusion in another product, internal enterprise use, vendor evaluation beyond private review, or use to design a similar system.
+
+6. Confidential and Protected Architecture Boundary
+
+This repository exposes only a bounded public demo and product-scaffold layer. It does not disclose the protected Elyria / Veritas architecture, private runtime estate, internal proof corridors, customer-specific governance maps, proprietary kernels, or deployment-certified systems.
+
+No inference from this repository may be treated as permission to reconstruct, claim, replicate, or commercialize protected Elyria / Veritas systems or methods.
+
+7. No Warranty
+
+The repository is provided for review and evaluation as-is, without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, non-infringement, security, regulatory compliance, or production readiness.
+
+8. Termination
+
+Any permission granted for viewing, local evaluation, or private demonstration terminates automatically if you violate this license or any proprietary notice in the repository.
+
+Upon termination, you must stop using the repository and delete any unauthorized copies, derivatives, extracts, or materials made from it.
+
+9. Permission Requests
+
+Requests for commercial access, licensing, implementation, review, pilot engagement, or written permission must be directed to Samantha Revita / Elyria Systems.
+
