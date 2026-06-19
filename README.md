@@ -133,6 +133,17 @@ flowchart LR
     K --> L[Replay Verification]
     L --> M[Current Exposure Graph]
     M --> N[Proof Packet Export]
+
+    classDef neutral fill:#f8fafc,stroke:#64748b,color:#0f172a;
+    classDef admit fill:#dcfce7,stroke:#166534,color:#14532d;
+    classDef hold fill:#fef9c3,stroke:#a16207,color:#713f12;
+    classDef refuse fill:#fee2e2,stroke:#991b1b,color:#7f1d1d;
+    classDef blackpath fill:#111827,stroke:#000000,color:#ffffff;
+    class A,B,C,D,E,F,K,L,M,N neutral;
+    class G admit;
+    class H hold;
+    class I refuse;
+    class J blackpath;
 ```
 
 Pipeline summary:
@@ -163,6 +174,19 @@ flowchart TD
     B --> BP[Black-Path Exposure]
     H --> RP[Repair Required]
     R --> BL[Blocked Movement]
+
+    classDef decision fill:#eff6ff,stroke:#1d4ed8,color:#172554;
+    classDef neutral fill:#f8fafc,stroke:#64748b,color:#0f172a;
+    classDef admit fill:#dcfce7,stroke:#166534,color:#14532d;
+    classDef hold fill:#fef9c3,stroke:#a16207,color:#713f12;
+    classDef refuse fill:#fee2e2,stroke:#991b1b,color:#7f1d1d;
+    classDef blackpath fill:#111827,stroke:#000000,color:#ffffff;
+    class A,S,E,C decision;
+    class M,SR,RV,PG neutral;
+    class AD admit;
+    class H,RP hold;
+    class R,BL refuse;
+    class B,BP blackpath;
 ```
 
 Example verdict distribution:
