@@ -40,6 +40,7 @@ RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS
 | File | Purpose |
 |---|---|
 | `README.md` | public runtime overview and local run path |
+| `STATUS.md` | plain-language current status snapshot |
 | `TRACEABILITY_MATRIX.md` | public claim-to-evidence map |
 | `ROADMAP_A_PLUS_BUYER_REVIEW.md` | phased A+ buyer-review roadmap |
 | `A_PLUS_VERIFICATION_GATE.md` | final evidence gate before A+ wording |
