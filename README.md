@@ -36,6 +36,112 @@ The architecture layer is universal. The public repo claim is bounded.
 
 This repository exposes the reviewable product/demo layer of the Consequence Twin. It does **not** expose protected Elyria / Veritas internals, claim substrate status, or claim production certification without security and customer-specific review.
 
+## ◈ Quickstart
+
+Run the full local reviewer path:
+
+```bash
+git clone https://github.com/Kamanaka5502/elyria-consequence-twin.git
+cd elyria-consequence-twin
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pytest tests
+uvicorn apps.api.main:app --reload --host 0.0.0.0 --port 8080
+```
+
+Open the dashboard:
+
+```text
+http://localhost:8080
+```
+
+Reviewer flow:
+
+```text
+1. Load dashboard
+2. Reset sandbox + generate receipts
+3. Submit accepted movement
+4. Submit black-path movement
+5. Load current exposure graph
+6. Replay receipt
+7. Export proof packet
+```
+
+Expected result:
+
+```text
+Dashboard loads.
+Movement can be submitted.
+Evidence can be attached.
+Signed receipt is emitted.
+Replay verifies.
+Current graph updates.
+Proof packet exports.
+Tests pass locally.
+```
+
+## ◈ Engine Flow
+
+The Consequence Twin evaluates whether movement may bind operational consequence. It does not wait for harm, drift, or audit discovery after the fact; it classifies movement before execution becomes real.
+
+```mermaid
+flowchart LR
+    A[Movement Intake] --> B[Authority Check]
+    B --> C[Standing Check]
+    C --> D[Evidence Gate]
+    D --> E[Custody / Hash Basis]
+    E --> F[Deterministic Verdict]
+    F -->|ADMIT| G[Signed Receipt]
+    F -->|HOLD| H[Repair / Evidence Required]
+    F -->|REFUSE| I[Blocked Movement]
+    F -->|NO_PROVABLE_ADMISSION| J[Black-Path Exposure]
+    G --> K[SQLite Receipt Store]
+    K --> L[Replay Verification]
+    L --> M[Current Exposure Graph]
+    M --> N[Proof Packet Export]
+```
+
+Pipeline summary:
+
+```text
+intake → authority → standing → evidence → custody/hash basis → verdict → receipt → storage → replay → graph → proof packet
+```
+
+## ◈ Example Exposure Graph
+
+The exposure graph shows where a movement sits after runtime classification. Green paths are admitted. Yellow paths require repair. Red paths are blocked. Black paths indicate movement attempting to bind without durable proof.
+
+```mermaid
+flowchart TD
+    M[Proposed Movement] --> A{Authority Valid?}
+    A -->|No| R[REFUSE]
+    A -->|Yes| S{Standing Active?}
+    S -->|No| R
+    S -->|Yes| E{Required Evidence Accepted?}
+    E -->|Accepted| C{Custody + Hash Basis?}
+    E -->|Missing| B[NO_PROVABLE_ADMISSION]
+    E -->|Insufficient| H[HOLD]
+    C -->|Complete| AD[ADMIT]
+    C -->|Gap| H
+    AD --> SR[Signed Receipt]
+    SR --> RV[Replay Verification]
+    RV --> PG[Proof Packet]
+    B --> BP[Black-Path Exposure]
+    H --> RP[Repair Required]
+    R --> BL[Blocked Movement]
+```
+
+Example verdict distribution:
+
+```text
+ADMIT                 → evidence accepted, authority valid, standing active
+HOLD                  → evidence or custody requires repair
+REFUSE                → movement is blocked by invalid authority, inactive standing, or refusal state
+NO_PROVABLE_ADMISSION → movement attempts to bind without durable proof
+```
+
 ## ◈ Runtime Status
 
 | Capability | Status |
@@ -139,39 +245,6 @@ input_hash_matches
 verdict_matches
 signature_matches
 evidence_summary_matches
-```
-
-## ◈ Demo-Ready Runtime Path
-
-Run locally:
-
-```bash
-cd elyria-consequence-twin
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pytest tests
-uvicorn apps.api.main:app --reload --host 0.0.0.0 --port 8080
-```
-
-Open:
-
-```text
-http://localhost:8080
-```
-
-Expected reviewer result:
-
-```text
-RESULT: PASS
-Dashboard loads.
-Movement can be submitted.
-Evidence can be attached.
-Signed receipt is emitted.
-Replay verifies.
-Current graph updates.
-Proof packet exports.
 ```
 
 ## ◈ Client Mode
