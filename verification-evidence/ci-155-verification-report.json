@@ -1,0 +1,60 @@
+{
+  "final_marker": "RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS",
+  "generated_timestamp_utc": "2026-06-19T20:34:43+00:00",
+  "passed": true,
+  "report_type": "elyria_admission_runtime_verification_report",
+  "results": [
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.13/x64/bin/python",
+        "-m",
+        "pytest"
+      ],
+      "name": "unit tests",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.13/x64/bin/python",
+        "scripts/generate_digest_manifest.py",
+        "review-bundle/latest"
+      ],
+      "name": "generate digest manifest",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.13/x64/bin/python",
+        "scripts/verify_digest_manifest.py",
+        "review-bundle/latest"
+      ],
+      "name": "verify digest manifest",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.13/x64/bin/python",
+        "external_verifier/verify_bundle.py",
+        "review-bundle/latest"
+      ],
+      "name": "external verifier",
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.13/x64/bin/python",
+        "scripts/production_preflight.py",
+        "--mode",
+        "review"
+      ],
+      "name": "production preflight review mode",
+      "passed": true,
+      "returncode": 0
+    }
+  ],
+  "skipped_tests": false
+}
