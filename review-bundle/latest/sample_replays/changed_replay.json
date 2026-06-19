@@ -1,0 +1,18 @@
+{
+  "changed_condition_replay": true,
+  "changed_fields": [
+    "authority_present",
+    "evidence_items"
+  ],
+  "changed_verdict": "ADMIT",
+  "new_receipt_id": "RCT-REVIEW-ADMIT-001",
+  "old_receipt_preserved": true,
+  "original_receipt_id": "RCT-REVIEW-REFUSE-001",
+  "original_verdict": "REFUSE",
+  "reason_for_difference": [
+    "changed field: authority_present",
+    "changed field: evidence_items",
+    "verdict changed from REFUSE to ADMIT"
+  ],
+  "replay_type": "changed_condition_replay"
+}
