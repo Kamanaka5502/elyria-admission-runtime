@@ -236,20 +236,7 @@ Export Proof Packet
 
 This repo is **demo-ready and production-oriented**, not production-certified.
 
-Production deployment requires:
-
-```text
-security review
-secret management
-enterprise authentication and authorization
-customer-specific policy mapping
-customer-specific evidence mapping
-logging and retention review
-deployment hardening
-key-management review
-legal/compliance review where applicable
-operational acceptance testing
-```
+Production deployment requires security review, secret management, enterprise authentication and authorization, customer-specific policy mapping, customer-specific evidence mapping, logging and retention review, deployment hardening, key-management review, legal/compliance review where applicable, and operational acceptance testing.
 
 Correct production boundary:
 
@@ -259,41 +246,19 @@ Universal architecture layer, bounded public repo claim.
 Samantha Revita / Elyria Systems.
 ```
 
-## ◈ Commercial Offer Surface
+## ◈ Engagement Boundary
 
-### Consequence Twin Scan
+Qualified implementation, review, and pilot engagements are scoped privately.
 
-A 7-10 day operational diagnostic that maps where AI, workflow, access, approval, payment, deployment, or customer-operation actions may bind consequence without sufficient authority, evidence, custody, standing, receipt, or replay proof.
+Scope depends on the governed movement, evidence complexity, deployment boundary, authority model, customer review requirements, and required operational depth.
 
-Possible deliverables:
-
-```text
-Consequence Binding Map
-Consequence Exposure Graph
-Authority Collapse Report
-Evidence Gap Register
-AI / Workflow Action Exposure Map
-Refusal Conditions Matrix
-Revalidation Trigger Map
-Executive Consequence Risk Brief
-Implementation Blueprint
-```
+No public package terms are defined in this repository.
 
 ## ◈ Safety Boundary
 
-Do not commit, screenshot, or export:
-
-```text
-real API tokens
-real signing secrets
-client evidence
-private hashes
-customer identifiers
-regulated data
-production proof packets
-```
-
 Use sanitized demo data only for public demos, proof packets, and reviewer runs.
+
+Do not use live credentials, customer identifiers, regulated records, private evidence, or production proof packets in public examples.
 
 ## ◈ Ownership
 
