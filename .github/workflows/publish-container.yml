@@ -13,7 +13,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/kamanaka5502/elyria-consequence-twin
+  IMAGE_NAME: ghcr.io/kamanaka5502/elyria-admission-runtime
 
 jobs:
   build-and-publish:
