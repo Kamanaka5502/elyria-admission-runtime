@@ -1,27 +1,26 @@
 <p align="center">
-  <img src="assets/consequence-exposure-graph.svg" alt="Elyria Consequence Twin — Consequence Admission Before Execution Binds" width="100%" />
+  <img src="assets/consequence-admission-before-execution-binds.jpg" alt="Elyria Consequence Twin — Consequence Admission Before Execution Binds" width="100%" />
 </p>
 
 # Elyria Consequence Twin
 
+<p align="center"><strong>Consequence Admission Before Execution Binds</strong></p>
+
 <p align="center">
-  <img alt="Proof Layer" src="https://img.shields.io/badge/PROOF_LAYER-CONSEQUENCE_ADMISSION-071928?style=for-the-badge&labelColor=02070D&color=37E6FF" />
-  <img alt="Boundary Gate" src="https://img.shields.io/badge/BOUNDARY_GATE-AUTHORITY_%2B_STANDING_%2B_EVIDENCE_%2B_CUSTODY-071928?style=for-the-badge&labelColor=02070D&color=00FF9D" />
-  <img alt="Evidence Gate" src="https://img.shields.io/badge/EVIDENCE_GATE-ENFORCEMENT_BEARING-071928?style=for-the-badge&labelColor=02070D&color=8FFFC4" />
-  <img alt="Black Path" src="https://img.shields.io/badge/BLACK_PATH-NO_PROVABLE_ADMISSION-071928?style=for-the-badge&labelColor=02070D&color=FF4B67" />
+  ◈ Full-Stack Runtime Proof Surface &nbsp; │ &nbsp;
+  ◈ Evidence-Gated Admission &nbsp; │ &nbsp;
+  ◈ Signed Receipts &nbsp; │ &nbsp;
+  ◈ Replay Verification &nbsp; │ &nbsp;
+  ◈ Black-Path Exposure
 </p>
 
 <p align="center">
-  <img alt="Signed Receipts" src="https://img.shields.io/badge/SIGNED_RECEIPTS-HMAC_SHA256_ENVELOPE-0B2233?style=flat-square&labelColor=071928&color=9CF7FF" />
-  <img alt="Replay Basis" src="https://img.shields.io/badge/REPLAY_BASIS-VERDICT_%2B_INPUT_%2B_EVIDENCE-0B2233?style=flat-square&labelColor=071928&color=37E6FF" />
-  <img alt="Runtime" src="https://img.shields.io/badge/FULL_STACK-DASHBOARD_API_ENGINE_STORAGE-0B2233?style=flat-square&labelColor=071928&color=00FF9D" />
-  <img alt="Reviewer Path" src="https://img.shields.io/badge/REVIEWER_PATH-FRESH_CLONE_%2B_TESTS-0B2233?style=flat-square&labelColor=071928&color=FFD36C" />
-  <img alt="Owner" src="https://img.shields.io/badge/SAMANTHA_REVITA-ELYRIA_SYSTEMS-0B2233?style=flat-square&labelColor=071928&color=9CF7FF" />
+  <strong>Samantha Revita / Elyria Systems</strong>
 </p>
+
+---
 
 ## ◈ Position
-
-**Consequence admission before execution binds.**
 
 Elyria Consequence Twin is a **full-stack buyer-facing runtime proof surface** for consequence-bearing systems. It models whether a proposed movement may become operationally real before execution binds.
 
@@ -38,6 +37,22 @@ Elyria Consequence Twin is a full-stack buyer-facing runtime proof surface withi
 The architecture layer is universal. The public repo claim is bounded.
 
 This repository demonstrates one working consequence-admission sandbox. It does **not** expose protected Elyria / Veritas internals, claim substrate status, or claim production certification without security and customer-specific review.
+
+## ◈ Proof Status
+
+| Surface | Status |
+|---|---|
+| Full-stack dashboard | present |
+| API assessment path | present |
+| Deterministic admission engine | present |
+| Structured evidence gate | enforcement-bearing |
+| Signed receipt envelope | present |
+| Replay verification | present |
+| SQLite receipt storage | present |
+| Current exposure graph | present |
+| Proof packet export | present |
+| Reviewer test path | present |
+| Production claim | bounded / not certified |
 
 ## ◈ What This Repo Proves
 
