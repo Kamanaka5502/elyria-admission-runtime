@@ -4,7 +4,7 @@
 
 This file defines the final buyer-review gate for Elyria Admission Runtime.
 
-The implementation now includes review layers for:
+The implementation includes review layers for:
 
 ```text
 RBAC
@@ -23,67 +23,69 @@ production preflight
 CI proof gates
 ```
 
-A+ buyer-review wording should only be used after verification evidence is recorded.
+## Gate Record
 
-## Final Gate Requirements
+```text
+Phase 1 evidence: recorded
+Phase 2 evidence: recorded
+Phase 3 evidence: recorded
+Phase 4 evidence: recorded
+GitHub Actions main: passed
+hosted fresh-checkout evidence: recorded
+digest verification: passed
+external verifier: passed
+production preflight review mode: passed
+final buyer-review issue: closed as completed
+```
 
-- Phase 1 verification evidence recorded
-- Phase 2 verification evidence recorded
-- Phase 3 verification evidence recorded
-- Phase 4 verification evidence recorded
-- GitHub Actions pass on `main`
-- fresh-clone review test passes
-- digest verification passes
-- external verifier passes
-- production preflight review mode passes
-- release tag is published
-- release title and description use Elyria Admission Runtime
+## CI Evidence
 
-## Fresh Clone Commands
+```text
+workflow: ci
+run: #155
+commit: 0ba1635
+status: Success
+job: proof-gates green
+artifact: verification-report
+final marker: RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS
+```
+
+Evidence files:
+
+```text
+verification-evidence/ci-155-verification-report.json
+verification-evidence/CI_155_SUMMARY.md
+FRESH_CLONE_REVIEW_TEST.md
+```
+
+## Reviewer Verification
 
 ```bash
-git clone https://github.com/Kamanaka5502/elyria-admission-runtime.git
-cd elyria-admission-runtime
-python -m venv .venv
-. .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip install -e .
-python scripts/verify_all.py
+python scripts/verify_all.py --report verification-report.json
 ```
 
-## Expanded Verification Path
-
-The full verifier runs:
+Expected final marker:
 
 ```text
-python -m pytest
-python scripts/generate_digest_manifest.py review-bundle/latest
-python scripts/verify_digest_manifest.py review-bundle/latest
-python external_verifier/verify_bundle.py review-bundle/latest
-python scripts/production_preflight.py --mode review
-```
-
-## Expected Evidence
-
-```text
-pytest PASS
-DIGEST MANIFEST PASS
-RESULT: ELYRIA ADMISSION RUNTIME VERIFIER PASS
-PRODUCTION PREFLIGHT REVIEW MODE PASS
 RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS
 ```
 
-## Final Buyer-Review Claim After Gate Passes
+## Current Buyer-Review Claim
 
 ```text
-Elyria Admission Runtime is an A+ bounded buyer-review consequence-admission runtime candidate. It demonstrates pre-consequence authority, standing, evidence, custody, admissibility, refusal/no-bind behavior, route closure, signed receipts, replay verification, tamper-evident audit chain, digest verification, external verifier review, and production preflight. Production deployment remains subject to customer security approval or external audit.
+Elyria Admission Runtime is an A+ bounded buyer-review consequence-admission runtime candidate on current main. It demonstrates pre-consequence authority, standing, evidence, custody, admissibility, refusal/no-bind behavior, route closure, signed receipts, replay verification, tamper-evident audit chain, digest verification, external verifier review, and production preflight review mode.
 ```
 
-## Current Status
+## Release Synchronization Boundary
 
 ```text
-Implementation: complete across Phases 1-4
-Verification: pending CI and fresh-clone evidence
-Production deployment: not asserted
+existing tag: v0.8.1-public
+verified runtime: current main
+next release action: publish a new immutable tag from current main
 ```
+
+The historical `v0.8.1-public` marker remains valid as release history. A new tag is required before presenting the current verified main branch as an immutable release snapshot.
+
+## Production Boundary
+
+Production deployment remains subject to customer security approval, deployment review, policy mapping, and external review where required.
