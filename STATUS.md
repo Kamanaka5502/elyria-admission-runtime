@@ -4,8 +4,9 @@
 
 ```text
 Implementation: complete across Phases 1-4
-Verification: pending CI and fresh-clone evidence
-Public posture: bounded buyer-review runtime candidate
+Verification: CI proof-gates and hosted fresh-checkout evidence recorded
+Final buyer-review gate: complete on current main
+Public posture: A+ bounded buyer-review consequence-admission runtime candidate
 Production deployment: subject to customer review and external review where required
 ```
 
@@ -35,6 +36,23 @@ one-command verification runner
 verification report output
 ```
 
+## Recorded Verification Evidence
+
+```text
+GitHub Actions ci #155: Success
+job: proof-gates green
+artifact: verification-report
+verification result: RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS
+```
+
+Evidence files:
+
+```text
+verification-evidence/ci-155-verification-report.json
+verification-evidence/CI_155_SUMMARY.md
+FRESH_CLONE_REVIEW_TEST.md
+```
+
 ## Primary Verification Command
 
 ```bash
@@ -47,25 +65,20 @@ Expected final marker:
 RESULT: ELYRIA ADMISSION RUNTIME FULL VERIFY PASS
 ```
 
-## Evidence Still Required
+## Release Status
 
 ```text
-GitHub Actions green status on main
-fresh-clone review output
-verification-report.json artifact
-final Issue #6 checklist completion
-release tag and release wording check
+existing tag: v0.8.1-public
+existing tag role: historic public release marker
+current verified runtime: main
+release sync: publish a new tag from current main before presenting an immutable current release snapshot
 ```
 
 ## Current Safe Claim
 
 ```text
-Elyria Admission Runtime is a bounded buyer-review consequence-admission runtime candidate with implemented proof-gate layers across access control, tenant boundary, signed receipt review, audit-chain review, policy-pack mapping, no-bind proof, route closure, changed-condition replay, external verifier review, digest verification, and production preflight review mode.
+Elyria Admission Runtime is an A+ bounded buyer-review consequence-admission runtime candidate on current main, with recorded CI proof-gate evidence for unit tests, digest verification, external verifier review, and production preflight review mode.
 ```
-
-## Hold Until Evidence Is Recorded
-
-Final A+ wording should wait until CI and fresh-clone evidence are recorded in the final verification gate.
 
 ## Production Boundary
 
