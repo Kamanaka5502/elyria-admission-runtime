@@ -49,10 +49,6 @@ def _add_unique(reasons: List[str], reason: str) -> None:
         reasons.append(reason)
 
 
-def _has_structured_evidence(payload: Dict[str, Any]) -> bool:
-    return bool(payload.get("evidence_items"))
-
-
 def _required_evidence_missing(evidence_summary: Dict[str, Any]) -> bool:
     return any(
         str(reason).startswith("required evidence missing:")
@@ -62,11 +58,13 @@ def _required_evidence_missing(evidence_summary: Dict[str, Any]) -> bool:
 
 def assess_movement(payload: Dict[str, Any]) -> AssessmentResult:
     """
-    Deterministic consequence-admission assessment.
+    Deterministic assessment of a proposed consequence-bearing movement.
 
-    This is a starter pilot engine, not the full private Elyria runtime.
-    It enforces no silent admission: every missing dimension becomes HOLD,
-    REFUSE, or NO_PROVABLE_ADMISSION.
+    This public pilot classifies caller-supplied dimensions; it does not
+    independently constitute standing or verify the truth/provenance of
+    caller assertions. Structured evidence is required for ADMIT, but the
+    presence of an attachment or a hash/reference does not itself authenticate
+    the underlying evidence.
     """
 
     movement_id = str(payload.get("movement_id", "UNKNOWN"))
@@ -83,7 +81,7 @@ def assess_movement(payload: Dict[str, Any]) -> AssessmentResult:
     replay_available = _required_bool(payload, "replay_available")
 
     evidence_summary = summarize_evidence(payload)
-    has_structured_evidence = _has_structured_evidence(payload)
+    has_structured_evidence = evidence_summary["total"] > 0
 
     hard_refusal_reasons: List[str] = []
     hold_reasons: List[str] = []
@@ -111,6 +109,19 @@ def assess_movement(payload: Dict[str, Any]) -> AssessmentResult:
     if not replay_available:
         hold_reasons.append("replay unavailable")
 
+    # Fail closed when the caller asserts evidence exists but supplies no
+    # structured evidence objects. The Boolean fields are not substitutes
+    # for the evidence attachments required by this public pilot.
+    if not has_structured_evidence:
+        _add_unique(
+            hold_reasons,
+            "no structured evidence attachments provided; admission cannot be established",
+        )
+        if authority_present and authority_scope_valid and standing_active:
+            black_path_reasons.append(
+                "authority and standing are asserted but required structured evidence is absent"
+            )
+
     if has_structured_evidence and evidence_summary["status"] == "attention_required":
         for reason in evidence_summary["reasons"]:
             _add_unique(hold_reasons, reason)
@@ -119,7 +130,7 @@ def assess_movement(payload: Dict[str, Any]) -> AssessmentResult:
         black_path_reasons.append("consequence path lacks durable receipt or replay proof")
     if authority_present and authority_scope_valid and standing_active and not evidence_present:
         black_path_reasons.append("authority appears to admit movement without required evidence")
-    if custody_preserved is False and evidence_present:
+    if not custody_preserved and evidence_present:
         black_path_reasons.append("evidence exists but custody does not hold")
 
     if (
@@ -144,7 +155,7 @@ def assess_movement(payload: Dict[str, Any]) -> AssessmentResult:
         reasons = hold_reasons
     else:
         verdict = Verdict.ADMIT
-        reasons = ["all required admission dimensions hold"]
+        reasons = ["all configured assessment dimensions passed; standing and evidence provenance are not independently verified by this pilot"]
 
     return AssessmentResult(
         movement_id=movement_id,

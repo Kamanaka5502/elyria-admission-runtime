@@ -1,64 +1,53 @@
 # Claim Boundary
 
-## This repo claims
+## What this public repository demonstrates
 
-This repo demonstrates a bounded full-stack consequence-admission runtime and buyer-facing product scaffold for Elyria's universal consequence-governance architecture.
+This repository demonstrates a bounded public pilot for consequence-admission assessment. It can accept a movement payload, classify caller-supplied assessment dimensions, summarize supplied structured evidence, create a signed receipt, persist the record, and replay-check the recorded assessment.
 
-It proves that a consequence-bearing movement can be:
+The configured verdicts are:
 
-- entered through a client-facing dashboard
-- submitted through an API layer
-- evaluated against authority, standing, evidence, custody, refusal, receipt, and replay dimensions
-- classified into `ADMIT`, `HOLD`, `REFUSE`, or `NO_PROVABLE_ADMISSION`
-- attached to structured evidence references
-- summarized into an evidence basis
-- emitted as a signed receipt
-- stored in a local receipt store
-- replay-verified against the stored verdict basis
-- rendered into a current consequence exposure graph
-- exported as a proof packet
-- tested through a local reviewer path
+- `ADMIT`
+- `HOLD`
+- `REFUSE`
+- `NO_PROVABLE_ADMISSION`
 
-## This repo does not claim
+The public pilot now fails closed when no structured evidence attachments are supplied: favorable caller-supplied Boolean fields alone are not enough to produce `ADMIT`.
 
-- It does not expose protected Elyria / Veritas kernel internals.
-- It does not claim production certification unless externally certified.
-- It does not claim customer-specific certification without customer corridor verification.
-- It does not claim universal governance proof by itself.
-- It does not claim substrate status.
-- It does not claim deployment readiness without security review.
-- It does not replace regulated legal, medical, financial, security, or compliance review.
+## What this repository does not independently establish
 
-## Architecture posture
+This repository does not, by itself:
 
-Elyria is universal at the architecture layer.
+- derive standing from an authoritative mathematical Floor;
+- independently verify the provenance or truth of caller-supplied standing and authority assertions;
+- authenticate the underlying evidence merely because an attachment has an accepted status or a hash/reference string;
+- prove exclusive control over every route to an external protected effect;
+- prove that an external consequence did or did not commit;
+- establish universal governance proof, substrate status, or production certification.
 
-This repository is bounded at the public runtime/product-demo layer.
+An HMAC-authenticated receipt can support integrity and authenticity of the signed record relative to the shared secret. It does not make the record's premises true. Deterministic replay can show that the same recorded input yields the same assessment; it is not independent verification of the input's truth.
 
-The public claim is conservative: this repo demonstrates one full-stack consequence-admission runtime scaffold within the larger Elyria consequence-governance architecture.
+## Evidence gate behavior
 
-## Full-stack boundary
+The configured behavior is:
 
-Full-stack means the repo contains a working local chain from interface to proof artifact:
+- no structured evidence attachments: `NO_PROVABLE_ADMISSION` when authority and standing are asserted as potentially binding; otherwise the missing-evidence hold/refusal logic applies;
+- structured evidence with required items missing, insufficient, or lacking required custody/hash-reference fields: non-admission according to the engine's configured refusal/black-path/hold precedence;
+- structured evidence with acceptable fields: `ADMIT` remains possible, subject to the other caller-supplied dimensions.
 
-```text
-frontend dashboard
-API layer
-admission engine
-evidence summary layer
-signed receipt runtime
-local storage
-replay verifier
-exposure graph
-proof packet export
-tests
-buyer/reviewer documentation
-```
+A hash/reference field is a reference, not proof that the referenced content is authentic or authoritative. An accepted status is a classification supplied in the record, not independent validation of the source.
 
-Full-stack does not mean production certification, protected kernel disclosure, or substrate status.
+## Standing and effect boundary
 
-## Core invariant
+The public API accepts standing and other dimensions as caller-supplied fields. Type-checking a Boolean is not provenance verification. A trusted standing mechanism would require a separately specified authority model and verification procedure, including scope, validity, revocation, and binding to the exact transition.
 
-Proof before operation.  
-Claim boundary before promotion.  
-No protected consequence binds without the boundary result.
+The inspected public API demonstrates an assessment and receipt path, not exclusive custody of an external operation. Claims about pre-effect enforcement or protected consequences require separate, explicit evidence for the relevant effect boundary.
+
+## Scope and limitations
+
+This is a bounded public runtime/pilot, not the full private Elyria runtime. Separate repositories or harnesses must not be treated as one integrated chain without evidence of integration. Tests establish only the software behaviors they actually exercise.
+
+Production use requires independent security review, appropriate key management, customer-specific policy and evidence mapping, and operational validation.
+
+## Public claim
+
+The repository demonstrates a bounded consequence-admission assessment pilot with structured-evidence gating, signed assessment receipts, persistence, and replay checks. It does not independently prove the truth of caller assertions, constitutive standing, or exclusive control over external protected consequences.
