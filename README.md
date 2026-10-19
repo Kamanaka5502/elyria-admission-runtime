@@ -45,6 +45,14 @@ Production deployment: subject to customer review and external review where requ
 
 ---
 
+## Audit correction note (October 2026)
+
+The public pilot requires structured evidence attachments before `ADMIT` can be returned. Favorable Boolean fields such as `evidence_present=True` and `evidence_sufficient=True` do not substitute for an evidence collection.
+
+This is still a bounded assessment pilot. The public API accepts standing and other dimensions as caller-supplied assertions; it does not independently derive standing from a governing Floor or prove that an external protected effect is exclusively controlled. A signed receipt authenticates the recorded assessment relative to its signing secret; it does not establish the truth of its premises. See `CLAIM_BOUNDARY.md` for the explicit claim boundary.
+
+The correction is not a claim that every audit finding has been resolved. Each remaining finding requires its own source review, test, and disposition.
+
 ## ◈ Position
 
 Elyria Admission Runtime is a **full-stack consequence-admission runtime** for systems where action should not become operationally real without valid authority, active standing, sufficient evidence, preserved custody, deterministic verdicting, signed receipt, and replayable proof.
