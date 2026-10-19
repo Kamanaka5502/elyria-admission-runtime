@@ -37,8 +37,8 @@ python scripts/verify_all.py --report verification-report.json
 Current posture:
 
 ```text
-Implementation: complete across Phases 1-4
-Verification: pending CI and fresh-clone evidence
+Implementation: bounded public pilot; audit correction under review
+Verification: full-repository CI / fresh-clone evidence pending
 Public posture: bounded buyer-review runtime candidate
 Production deployment: subject to customer review and external review where required
 ```
