@@ -13,7 +13,19 @@ DEMO_ASSESSMENTS = [
         "revalidation_required": False,
         "receipt_available": True,
         "replay_available": True,
-        "notes": "Clean admitted movement."
+        "evidence_items": [
+            {
+                "evidence_id": "DEMO-EVIDENCE-001",
+                "evidence_type": "policy_record",
+                "source_system": "demo.registry",
+                "custody_owner": "demo.operator",
+                "hash_reference": "sha256:demo-fixture-reference",
+                "required": True,
+                "status": "accepted",
+                "notes": "Sanitized fixture demonstrating the required structured-evidence shape; not authenticated production evidence."
+            }
+        ],
+        "notes": "Clean admitted movement with a structured demo evidence fixture."
     },
     {
         "movement_id": "MOVE-002",
