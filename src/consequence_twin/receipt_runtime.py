@@ -26,6 +26,11 @@ def sha256_json(value: Any) -> str:
 
 def sign_payload(value: Dict[str, Any], secret: str | None = None) -> str:
     signing_secret = secret or get_settings().receipt_signing_secret
+    if not signing_secret:
+        raise RuntimeError(
+            "Receipt signing secret is required; explicitly configure demo mode or set "
+            "ELYRIA_RECEIPT_SIGNING_SECRET for client mode."
+        )
     return hmac.new(
         signing_secret.encode("utf-8"),
         canonical_json(value).encode("utf-8"),
