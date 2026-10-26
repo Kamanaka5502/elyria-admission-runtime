@@ -95,11 +95,9 @@ def validate_signing_config(config: SigningConfig) -> None:
 def sign_material(material: Dict[str, Any], config: SigningConfig) -> str:
     validate_signing_config(config)
     if config.mode == SigningMode.KMS_STUB:
-        body = f"kms_stub:{config.key_id}:{sha256_json(material)}"
-        return hashlib.sha256(body.encode("utf-8")).hexdigest()
+        raise SigningError("KMS_STUB is not a cryptographic signer; configure a real KMS adapter.")
     if config.mode == SigningMode.EXTERNAL_SIGNING_ADAPTER:
-        body = f"external_adapter:{config.key_id}:{sha256_json(material)}"
-        return hashlib.sha256(body.encode("utf-8")).hexdigest()
+        raise SigningError("EXTERNAL_SIGNING_ADAPTER is not configured with a real signer.")
     if not config.secret:
         raise SigningError("signing secret is required")
     return hmac.new(
