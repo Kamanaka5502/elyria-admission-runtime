@@ -36,6 +36,7 @@ def test_client_mode_protects_sandbox_reset(monkeypatch, tmp_path):
 def test_client_mode_accepts_bearer_token(monkeypatch, tmp_path):
     monkeypatch.setenv("ELYRIA_MODE", "client")
     monkeypatch.setenv("ELYRIA_API_TOKEN", "test-token")
+    monkeypatch.setenv("ELYRIA_RECEIPT_SIGNING_SECRET", "test-client-signing-secret-0123456789")
     monkeypatch.setenv("ELYRIA_DB_PATH", str(tmp_path / "client.db"))
     client = TestClient(app)
     headers = {"Authorization": "Bearer test-token"}
