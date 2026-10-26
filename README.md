@@ -434,3 +434,15 @@ Samantha Revita / Elyria Systems
 ```
 
 All rights reserved.
+
+
+## Audit remediation: runtime and signing boundaries
+
+- `ELYRIA_MODE` defaults to `client`; unauthenticated demo mode must be explicitly selected with `ELYRIA_MODE=demo`.
+- Unknown `ELYRIA_MODE` values fail instead of silently falling back to demo.
+- Demo authentication bypass is disabled when `APP_ENV=production`.
+- Client mode requires an explicit `ELYRIA_API_TOKEN` and `ELYRIA_RECEIPT_SIGNING_SECRET` configuration.
+- `KMS_STUB` and `EXTERNAL_SIGNING_ADAPTER` are placeholders, not signers; attempts to use them now fail closed. Configure a real signer before using those modes.
+- Demo HMAC keys are public demonstration values and are not production key management.
+
+These are source-level remediation changes. They do not constitute a production security certification; run the repository test suite and verify a fresh deployment configuration before release.
