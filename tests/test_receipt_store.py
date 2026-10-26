@@ -29,7 +29,8 @@ def base_payload(**overrides):
     return payload
 
 
-def test_receipt_can_be_written_once_and_retrieved(tmp_path):
+def test_receipt_can_be_written_once_and_retrieved(tmp_path, monkeypatch):
+    monkeypatch.setenv("ELYRIA_MODE", "demo")
     receipt = create_receipt(base_payload()).to_dict()
     stored = write_once_receipt(tmp_path, receipt)
     loaded = read_receipt(tmp_path, receipt["receipt_id"])
@@ -37,14 +38,14 @@ def test_receipt_can_be_written_once_and_retrieved(tmp_path):
     assert loaded == receipt
 
 
-def test_receipt_cannot_be_silently_overwritten(tmp_path):
+def test_receipt_cannot_be_silently_overwritten(tmp_path, monkeypatch):
     receipt = create_receipt(base_payload()).to_dict()
     write_once_receipt(tmp_path, receipt)
     with pytest.raises(ReceiptStoreError):
         write_once_receipt(tmp_path, receipt)
 
 
-def test_receipt_can_be_verified_after_reload(tmp_path):
+def test_receipt_can_be_verified_after_reload(tmp_path, monkeypatch):
     receipt = create_receipt(base_payload()).to_dict()
     write_once_receipt(tmp_path, receipt)
     verification = verify_stored_receipt(tmp_path, receipt["receipt_id"])
@@ -53,7 +54,7 @@ def test_receipt_can_be_verified_after_reload(tmp_path):
     assert verification["signature_matches"] is True
 
 
-def test_receipt_can_be_exported_into_proof_packet(tmp_path):
+def test_receipt_can_be_exported_into_proof_packet(tmp_path, monkeypatch):
     receipt = create_receipt(base_payload()).to_dict()
     write_once_receipt(tmp_path, receipt)
     packet = export_proof_packet(tmp_path, receipt["receipt_id"])
@@ -62,7 +63,8 @@ def test_receipt_can_be_exported_into_proof_packet(tmp_path):
     assert packet["manifest"]["receipt.json"] == packet["receipt_hash"]
 
 
-def test_receipt_ids_listed(tmp_path):
+def test_receipt_ids_listed(tmp_path, monkeypatch):
+    monkeypatch.setenv("ELYRIA_MODE", "demo")
     first = create_receipt(base_payload(movement_id="MOVE-001")).to_dict()
     second = create_receipt(base_payload(movement_id="MOVE-002")).to_dict()
     write_once_receipt(tmp_path, first)

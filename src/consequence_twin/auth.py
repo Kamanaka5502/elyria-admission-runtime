@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import secrets
 from typing import Annotated
 
@@ -10,7 +11,9 @@ from .settings import get_settings
 
 def require_client_auth(authorization: Annotated[str | None, Header()] = None) -> None:
     settings = get_settings()
-    if settings.is_demo_mode:
+    app_env = os.getenv("APP_ENV", "development").strip().lower()
+    production_deployment = app_env in {"production", "prod"}
+    if settings.is_demo_mode and not production_deployment:
         return
     if not settings.api_token:
         raise HTTPException(

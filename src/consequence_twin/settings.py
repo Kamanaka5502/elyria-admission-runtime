@@ -22,13 +22,17 @@ class RuntimeSettings:
 
 
 def get_settings() -> RuntimeSettings:
-    mode = os.getenv("ELYRIA_MODE", "demo").lower().strip()
+    # Demo access must be explicitly opted into; unknown values must never
+    # silently downgrade a deployment to the unauthenticated demo posture.
+    mode = os.getenv("ELYRIA_MODE", "client").lower().strip()
     if mode not in {"demo", "client"}:
-        mode = "demo"
+        raise ValueError("ELYRIA_MODE must be explicitly set to 'demo' or 'client'.")
+
+    default_demo_secret = "elyria-demo-signing-secret-change-me" if mode == "demo" else ""
     return RuntimeSettings(
         mode=mode,
         db_path=os.getenv("ELYRIA_DB_PATH", "data/elyria.db"),
         storage_backend=os.getenv("ELYRIA_STORAGE_BACKEND", "sqlite").lower().strip(),
         api_token=os.getenv("ELYRIA_API_TOKEN"),
-        receipt_signing_secret=os.getenv("ELYRIA_RECEIPT_SIGNING_SECRET", "elyria-demo-signing-secret-change-me"),
+        receipt_signing_secret=os.getenv("ELYRIA_RECEIPT_SIGNING_SECRET", default_demo_secret),
     )

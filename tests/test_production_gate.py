@@ -5,7 +5,8 @@ from consequence_twin.demo_data import DEMO_ASSESSMENTS
 from consequence_twin.receipt_runtime import create_receipt, verify_receipt
 
 
-def test_signed_receipt_verifies_signature():
+def test_signed_receipt_verifies_signature(monkeypatch):
+    monkeypatch.setenv("ELYRIA_MODE", "demo")
     receipt = create_receipt(DEMO_ASSESSMENTS[0]).to_dict()
     check = verify_receipt(receipt)
     assert check["input_hash_matches"] is True
@@ -35,6 +36,7 @@ def test_client_mode_protects_sandbox_reset(monkeypatch, tmp_path):
 def test_client_mode_accepts_bearer_token(monkeypatch, tmp_path):
     monkeypatch.setenv("ELYRIA_MODE", "client")
     monkeypatch.setenv("ELYRIA_API_TOKEN", "test-token")
+    monkeypatch.setenv("ELYRIA_RECEIPT_SIGNING_SECRET", "test-client-signing-secret-0123456789")
     monkeypatch.setenv("ELYRIA_DB_PATH", str(tmp_path / "client.db"))
     client = TestClient(app)
     headers = {"Authorization": "Bearer test-token"}
@@ -52,3 +54,12 @@ def test_demo_mode_remains_open(monkeypatch, tmp_path):
     client.post("/sandbox/reset")
     response = client.get("/receipts")
     assert response.status_code == 200
+
+
+def test_production_environment_does_not_allow_demo_auth_bypass(monkeypatch, tmp_path):
+    monkeypatch.setenv("ELYRIA_MODE", "demo")
+    monkeypatch.setenv("APP_ENV", "production")
+    monkeypatch.delenv("ELYRIA_API_TOKEN", raising=False)
+    monkeypatch.setenv("ELYRIA_DB_PATH", str(tmp_path / "prod-demo.db"))
+    response = TestClient(app).get("/receipts")
+    assert response.status_code == 503

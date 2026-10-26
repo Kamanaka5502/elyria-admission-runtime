@@ -48,11 +48,19 @@ def load_signing_config(
     secret: str | None = None,
     production_mode: bool | None = None,
 ) -> SigningConfig:
-    resolved_mode = SigningMode(mode or os.getenv("ELYRIA_SIGNING_MODE", SigningMode.LOCAL_DEMO_HMAC.value))
+    raw_mode = mode or os.getenv("ELYRIA_SIGNING_MODE")
+    if raw_mode is None:
+        raw_mode = (
+            SigningMode.LOCAL_DEMO_HMAC.value
+            if os.getenv("ELYRIA_MODE", "client").strip().lower() == "demo"
+            else SigningMode.FILE_KEY.value
+        )
+    resolved_mode = SigningMode(raw_mode)
     resolved_production = (
         production_mode
         if production_mode is not None
-        else os.getenv("ELYRIA_MODE", "demo").lower() == "production"
+        else os.getenv("APP_ENV", "development").strip().lower() in {"production", "prod"}
+        or os.getenv("ELYRIA_MODE", "client").strip().lower() != "demo"
     )
     resolved_key_id = key_id or os.getenv("ELYRIA_SIGNING_KEY_ID") or (
         DEMO_KEY_ID if resolved_mode == SigningMode.LOCAL_DEMO_HMAC else ""
@@ -87,11 +95,9 @@ def validate_signing_config(config: SigningConfig) -> None:
 def sign_material(material: Dict[str, Any], config: SigningConfig) -> str:
     validate_signing_config(config)
     if config.mode == SigningMode.KMS_STUB:
-        body = f"kms_stub:{config.key_id}:{sha256_json(material)}"
-        return hashlib.sha256(body.encode("utf-8")).hexdigest()
+        raise SigningError("KMS_STUB is not a cryptographic signer; configure a real KMS adapter.")
     if config.mode == SigningMode.EXTERNAL_SIGNING_ADAPTER:
-        body = f"external_adapter:{config.key_id}:{sha256_json(material)}"
-        return hashlib.sha256(body.encode("utf-8")).hexdigest()
+        raise SigningError("EXTERNAL_SIGNING_ADAPTER is not configured with a real signer.")
     if not config.secret:
         raise SigningError("signing secret is required")
     return hmac.new(

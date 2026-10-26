@@ -92,13 +92,23 @@ def test_demo_key_cannot_be_used_in_production_mode():
         sign_receipt_fields(base_receipt(), config)
 
 
-def test_key_id_appears_in_receipt():
+def test_unimplemented_kms_stub_fails_closed():
     config = SigningConfig(
         mode=SigningMode.KMS_STUB,
         key_id="kms-stub-key-1",
         secret=None,
         production_mode=False,
     )
-    signed = sign_receipt_fields(base_receipt(), config)
-    assert signed["key_id"] == "kms-stub-key-1"
-    assert verify_signed_receipt(signed, config) is True
+    with pytest.raises(SigningError, match="not a cryptographic signer"):
+        sign_receipt_fields(base_receipt(), config)
+
+
+def test_unimplemented_external_adapter_fails_closed():
+    config = SigningConfig(
+        mode=SigningMode.EXTERNAL_SIGNING_ADAPTER,
+        key_id="external-key-1",
+        secret=None,
+        production_mode=False,
+    )
+    with pytest.raises(SigningError, match="not configured with a real signer"):
+        sign_receipt_fields(base_receipt(), config)
