@@ -48,11 +48,19 @@ def load_signing_config(
     secret: str | None = None,
     production_mode: bool | None = None,
 ) -> SigningConfig:
-    resolved_mode = SigningMode(mode or os.getenv("ELYRIA_SIGNING_MODE", SigningMode.LOCAL_DEMO_HMAC.value))
+    raw_mode = mode or os.getenv("ELYRIA_SIGNING_MODE")
+    if raw_mode is None:
+        raw_mode = (
+            SigningMode.LOCAL_DEMO_HMAC.value
+            if os.getenv("ELYRIA_MODE", "client").strip().lower() == "demo"
+            else SigningMode.FILE_KEY.value
+        )
+    resolved_mode = SigningMode(raw_mode)
     resolved_production = (
         production_mode
         if production_mode is not None
-        else os.getenv("ELYRIA_MODE", "demo").lower() == "production"
+        else os.getenv("APP_ENV", "development").strip().lower() in {"production", "prod"}
+        or os.getenv("ELYRIA_MODE", "client").strip().lower() != "demo"
     )
     resolved_key_id = key_id or os.getenv("ELYRIA_SIGNING_KEY_ID") or (
         DEMO_KEY_ID if resolved_mode == SigningMode.LOCAL_DEMO_HMAC else ""
